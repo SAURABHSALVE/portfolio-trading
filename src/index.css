@@ -5105,3 +5105,192 @@ footer.footer-full::before {
   nav, .theme-toggle, .cursor-ring, .cursor-dot { display: none; }
   section { padding: 20px 0; }
 }
+
+/* ============================================================
+   LIGHT MODE OVERRIDES
+   Fixes hardcoded dark values and enhances light theme aesthetics
+   ============================================================ */
+
+/* Body background dots — use blue tint in light mode */
+[data-theme="light"] body::after {
+  background-image: radial-gradient(circle, rgba(0,100,160,0.07) 1px, transparent 1px);
+}
+
+/* Hero background glow */
+[data-theme="light"] #hero::before {
+  background: radial-gradient(ellipse at center, rgba(0,136,204,0.06) 0%, transparent 70%);
+}
+
+/* Hero canvas particles — reduce opacity so they don't overpower light bg */
+[data-theme="light"] .hero-canvas { opacity: 0.25; }
+
+/* Hero scan line — use accent color */
+[data-theme="light"] .hero-photo-scan {
+  background: linear-gradient(180deg, transparent, rgba(0,136,204,0.08), transparent);
+}
+
+/* Hero photo border pulse — use light accent */
+[data-theme="light"] .hero-photo-corner {
+  box-shadow: 0 0 6px rgba(0,136,204,0.4);
+}
+
+/* Photo placeholder grid overlay in light mode */
+[data-theme="light"] .hero-photo-grid-overlay {
+  background-image:
+    linear-gradient(rgba(0,136,204,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,136,204,0.06) 1px, transparent 1px);
+}
+
+/* Nav social hover — light-friendly */
+[data-theme="light"] .nav-social-icon:hover {
+  background: rgba(0,0,0,0.05);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] .mobile-social-icon:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Nav scrolled — subtler in light mode */
+[data-theme="light"] nav.nav-scrolled {
+  box-shadow: 0 1px 0 0 var(--accent), 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* Mobile overlay — lighter */
+[data-theme="light"] .mobile-overlay {
+  background: rgba(0,0,0,0.35);
+}
+
+/* Journey card hover shadow — replace dark rgba with lighter version */
+[data-theme="light"] .journey-step-card:hover {
+  box-shadow: -4px 0 0 var(--jc, var(--accent)), 0 12px 40px rgba(0,0,0,0.10);
+}
+
+/* Journey tag hover — light bg won't show white */
+[data-theme="light"] .journey-step-tag:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Journey identity card radial glow */
+[data-theme="light"] .journey-identity::after {
+  background: radial-gradient(ellipse at bottom right, rgba(0,136,204,0.06), transparent 70%);
+}
+
+/* Blog filter active count badge */
+[data-theme="light"] .fbtn.active .fbtn-count {
+  background: rgba(240,244,248,0.6);
+  color: var(--bg);
+}
+
+/* Float home btn shadow */
+[data-theme="light"] .float-home-btn:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* GitHub social btn — dark shadow invisible in light */
+[data-theme="light"] .btn-social-github:hover {
+  border-color: #333;
+  color: #333;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+/* Skills card hover — lighter shadow */
+[data-theme="light"] .skill-card-inner:hover {
+  box-shadow: 0 12px 30px rgba(0,100,160,0.12);
+}
+
+/* Proficiency bar glow fill */
+[data-theme="light"] .prof-bar-fill-glow {
+  background: linear-gradient(90deg, transparent, rgba(0,136,204,0.25));
+}
+
+/* Hero name outline glow — adapt filter for light bg */
+[data-theme="light"] .name-outline {
+  filter: drop-shadow(0 0 16px rgba(0,136,204,0.35));
+}
+
+/* Contact headline span glow */
+[data-theme="light"] .contact-headline span {
+  text-shadow: 0 0 20px rgba(0,136,204,0.2);
+}
+
+/* Form focus ring — light-friendly */
+[data-theme="light"] .form-input:focus,
+[data-theme="light"] .form-textarea:focus {
+  box-shadow: 0 0 0 2px rgba(0,136,204,0.15), 0 0 10px rgba(0,136,204,0.06);
+}
+
+/* Skills tab active — slightly softer glow */
+[data-theme="light"] .skills-tab.active {
+  box-shadow: 0 0 16px rgba(0,136,204,0.25);
+}
+
+/* Filter btn active */
+[data-theme="light"] .filter-btn.active {
+  box-shadow: 0 0 16px rgba(0,136,204,0.25);
+}
+[data-theme="light"] .fbtn.active {
+  box-shadow: 0 0 12px rgba(0,136,204,0.2);
+}
+
+/* Section number badge pulse — softer */
+[data-theme="light"] .section-num {
+  animation: none;
+  opacity: 0.85;
+}
+
+/* Footer full bg in light mode */
+[data-theme="light"] footer.footer-full {
+  background: var(--bg2);
+  box-shadow: 0 -1px 0 var(--border);
+}
+
+/* Blog featured post border */
+[data-theme="light"] .featured-post {
+  border-color: rgba(0,136,204,0.18);
+}
+[data-theme="light"] .featured-post:hover {
+  border-color: rgba(0,136,204,0.4);
+  box-shadow: 0 4px 24px rgba(0,100,160,0.1);
+}
+
+/* Blog card hover */
+[data-theme="light"] .post-card:hover,
+[data-theme="light"] .blog-card:hover,
+[data-theme="light"] .cert-card:hover {
+  box-shadow: 0 8px 30px rgba(0,100,160,0.08);
+}
+
+/* Hero stat text shadow — remove glow in light mode */
+[data-theme="light"] .stat-num {
+  text-shadow: none;
+}
+
+/* Certifications count num — remove glow */
+[data-theme="light"] .cert-count-num {
+  text-shadow: none;
+}
+
+/* Edu year — remove glow */
+[data-theme="light"] .edu-year-num {
+  text-shadow: none;
+}
+
+/* Footer logo — remove heavy glow */
+[data-theme="light"] .footer-logo-big {
+  text-shadow: 0 0 12px rgba(0,136,204,0.2);
+  animation: none;
+}
+
+/* Nav logo — remove heavy glow */
+[data-theme="light"] .nav-logo {
+  text-shadow: 0 0 8px rgba(0,136,204,0.2);
+}
+[data-theme="light"] .nav-logo:hover {
+  text-shadow: 0 0 16px rgba(0,136,204,0.35);
+}
+
+/* Hero photo initials glow — soften */
+[data-theme="light"] .hero-photo-initials {
+  text-shadow: 0 0 16px rgba(0,136,204,0.3), 0 0 32px rgba(0,136,204,0.12);
+}
