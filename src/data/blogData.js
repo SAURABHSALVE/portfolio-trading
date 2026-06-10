@@ -284,20 +284,37 @@ output = weights @ V                # blend values according to attention` },
     ],
   },
 
-  /* ── POST: SPEED OF LIGHT (interactive) ──────────────────────────────── */
+  /* ── POST: SPEED OF LIGHT ─────────────────────────────────────────────── */
   {
     slug: 'speed-of-light',
     title: 'What Happens as You Approach the Speed of Light?',
     category: 'Physics',
-    tags: ['Special Relativity', 'Physics', 'Interactive', 'Three.js'],
+    tags: ['Special Relativity', 'Physics'],
     date: 'Jun 2026',
-    readTime: '8 min experience',
+    readTime: '5 min read',
     featured: false,
     excerpt:
-      'A cinematic, scroll-driven journey through Einstein\'s Special Relativity — drag the speed slider toward c and watch time dilation, length contraction, and spacetime itself respond in real time.',
+      'A plain-English tour of Einstein\'s Special Relativity — why time slows down, distances shrink, and nothing with mass can ever quite reach c.',
     content: [
-      { type: 'highlight', text: 'This is an interactive experience, not a regular article — open it to control a rocket\'s speed and watch time, distance, and spacetime respond live.' },
-      { type: 'p', text: 'Open the full interactive article to explore Special Relativity hands-on.' },
+      { type: 'highlight', text: 'Special Relativity isn\'t about things looking fast — it\'s about space and time themselves bending as speed increases.' },
+      { type: 'h2', text: 'The Speed Limit of the Universe' },
+      { type: 'p', text: 'Light travels at roughly 299,792 kilometres per second (≈ 1.08 billion km/h). Einstein\'s 1905 theory of Special Relativity starts from one strange but experimentally confirmed fact: every observer, no matter how fast they\'re moving, measures the speed of light as exactly the same value. To make that consistent, something else has to give — and that something is space and time.' },
+      { type: 'h2', text: 'Time Dilation: Clocks Run Slow' },
+      { type: 'p', text: 'As an object\'s speed approaches c, time for that object slows down relative to a stationary observer. A clock on a spaceship moving at 90% of light speed ticks noticeably slower than one on Earth — not because anything is broken, but because time itself is stretching.' },
+      { type: 'p', text: 'This is captured by the Lorentz factor, γ (gamma):' },
+      { type: 'code', lang: 'text', text: 'γ = 1 / √(1 − v²/c²)' },
+      { type: 'p', text: 'At 50% of c, γ ≈ 1.15. At 99% of c, γ ≈ 7.1. At 99.999% of c, γ ≈ 224. The closer v gets to c, the faster γ — and the time-dilation effect — blows up toward infinity.' },
+      { type: 'h2', text: 'Length Contraction: Distances Shrink' },
+      { type: 'p', text: 'The same factor works in reverse for distance. To an observer moving at high speed, objects (and the distance to them) appear contracted along the direction of motion by a factor of 1/γ. A 100-light-year journey could feel like just a few years to a traveler moving close to c — even though Earth observers still see the trip take ~100 years.' },
+      { type: 'h2', text: 'Why You Can Never Reach c' },
+      { type: 'p', text: 'As an object with mass speeds up, the energy needed to accelerate it further grows — and grows faster the closer it gets to c. The kinetic energy required is proportional to (γ − 1), which approaches infinity as v approaches c. To actually reach light speed, you\'d need infinite energy. That\'s why c isn\'t just a "fast" speed — it\'s a hard ceiling built into the structure of spacetime.' },
+      { type: 'list', items: [
+        'Time dilation: moving clocks run slow, by a factor of γ',
+        'Length contraction: moving objects shrink along their direction of travel, by 1/γ',
+        'Energy cost: accelerating toward c requires ever-increasing (eventually infinite) energy',
+        'Only massless particles, like photons, can travel at exactly c',
+      ]},
+      { type: 'tip', text: 'GPS satellites actually have to correct for both effects — their clocks run faster due to weaker gravity (General Relativity) and slower due to their orbital speed (Special Relativity). Without these corrections, GPS positions would drift by kilometres per day.' },
     ],
   },
 
