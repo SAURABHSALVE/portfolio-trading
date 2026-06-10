@@ -64,8 +64,7 @@ export default function Hero() {
         {/* ── Left: text content ── */}
         <div className="hero-content">
           <div className="hero-tag">
-            <span className="avail-dot" />
-            &nbsp;SYS_STATUS: Available for opportunities
+          
           </div>
 
           <div className="hero-role-label">AI &amp; ML Engineer</div>
@@ -135,7 +134,7 @@ export default function Hero() {
           </div>
 
           {/* Status badge */}
-          <div className="hero-photo-badge">IDENTITY_VERIFIED</div>
+          
         </div>
       </div>
 

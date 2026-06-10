@@ -248,6 +248,59 @@ agent_executor = AgentExecutor(
     ],
   },
 
+  /* ── POST: TRANSFORMERS IN 60 SECONDS ────────────────────────────────── */
+  {
+    slug: 'transformers-in-60-seconds',
+    title: 'Learn Transformers in Just 60 Seconds',
+    category: 'Machine Learning',
+    tags: ['Transformers', 'Attention', 'Deep Learning', 'NLP'],
+    date: 'Jun 2026',
+    readTime: '2 min read',
+    featured: false,
+    excerpt:
+      'Self-attention, multi-head attention, and positional encoding — the three ideas that power every modern LLM, explained as fast as humanly possible.',
+    content: [
+      { type: 'highlight', text: 'Every LLM you\'ve used — GPT, Gemini, Claude — is built on the Transformer architecture. Here\'s the entire idea, stripped down to the essentials.' },
+      { type: 'h2', text: 'The Core Idea: Attention' },
+      { type: 'p', text: 'Older models (RNNs) read text one word at a time, left to right, like a tape. By the time they reached word 50, they\'d half-forgotten word 1. Transformers throw that away: every word looks at every other word in the sentence, all at once, and decides how much to "pay attention" to each one.' },
+      { type: 'p', text: 'Concretely: each word is turned into three vectors — Query (what am I looking for?), Key (what do I contain?), and Value (what information do I carry?). A word\'s new representation is a weighted sum of all Values, where the weights come from comparing its Query against every other word\'s Key.' },
+      { type: 'code', lang: 'python', text: `# Simplified self-attention
+scores = Q @ K.T / sqrt(d_k)        # how much each word relates to every other word
+weights = softmax(scores, dim=-1)   # turn scores into probabilities
+output = weights @ V                # blend values according to attention` },
+      { type: 'h2', text: 'Multi-Head Attention: Many Perspectives at Once' },
+      { type: 'p', text: 'One attention pass might learn "which word is the subject of this verb." Another might learn "which adjective describes this noun." Instead of picking one, Transformers run several attention "heads" in parallel — each learning a different relationship — then concatenate the results.' },
+      { type: 'h2', text: 'Positional Encoding: Teaching Order Without Sequence' },
+      { type: 'p', text: 'Since attention looks at all words simultaneously, it has no built-in sense of order — "dog bites man" and "man bites dog" would look identical. The fix: add a unique positional signal (sine/cosine waves of different frequencies) to each word\'s embedding, so position 1 and position 2 become distinguishable.' },
+      { type: 'h2', text: 'Stack, Repeat, Done' },
+      { type: 'p', text: 'A Transformer block = multi-head attention + a small feed-forward network, wrapped with residual connections and layer normalisation. Stack a dozen (or a hundred) of these blocks, train on enough text, and you get GPT-style models.' },
+      { type: 'list', items: [
+        'Self-attention: every token looks at every other token, weighted by relevance',
+        'Multi-head: run attention multiple times in parallel for different relationships',
+        'Positional encoding: injects word order since attention alone is order-agnostic',
+        'Stack N blocks → scale data + parameters → modern LLMs',
+      ]},
+      { type: 'tip', text: 'If you remember one thing: attention = "for every word, build a custom blend of every other word, weighted by how relevant it is right now." Everything else in the Transformer exists to make that idea trainable, parallel, and order-aware.' },
+    ],
+  },
+
+  /* ── POST: SPEED OF LIGHT (interactive) ──────────────────────────────── */
+  {
+    slug: 'speed-of-light',
+    title: 'What Happens as You Approach the Speed of Light?',
+    category: 'Physics',
+    tags: ['Special Relativity', 'Physics', 'Interactive', 'Three.js'],
+    date: 'Jun 2026',
+    readTime: '8 min experience',
+    featured: false,
+    excerpt:
+      'A cinematic, scroll-driven journey through Einstein\'s Special Relativity — drag the speed slider toward c and watch time dilation, length contraction, and spacetime itself respond in real time.',
+    content: [
+      { type: 'highlight', text: 'This is an interactive experience, not a regular article — open it to control a rocket\'s speed and watch time, distance, and spacetime respond live.' },
+      { type: 'p', text: 'Open the full interactive article to explore Special Relativity hands-on.' },
+    ],
+  },
+
   /* ── POST 03 ───────────────────────────────────────────────────────── */
   {
     slug: 'resnet50-fastapi-docker-deployment',

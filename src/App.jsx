@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, Suspense, lazy } from 'react'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { ThemeProvider } from './context/ThemeContext'
 import Cursor from './components/Cursor'
@@ -17,6 +17,9 @@ import Footer from './components/Footer'
 import Skills from './pages/Skills'
 import BlogList from './pages/BlogList'
 import BlogPost from './pages/BlogPost'
+
+/* Heavy interactive (Three.js) article — lazy-loaded on its own chunk */
+const SpeedOfLight = lazy(() => import('./pages/SpeedOfLight'))
 
 /* Home page — Hero + Journey + Experience + Certifications + Achievements + Education */
 function HomePage() {
@@ -106,6 +109,14 @@ export default function App() {
         <Route path="/contact"    element={<PageFrame><div className="page-top-pad"><Contact /></div></PageFrame>} />
         <Route path="/skills"     element={<PageFrame><Skills /></PageFrame>} />
         <Route path="/blog"       element={<PageFrame showFooter={false}><BlogList /></PageFrame>} />
+        <Route
+          path="/blog/speed-of-light"
+          element={
+            <Suspense fallback={<div className="page-top-pad" style={{ minHeight: '100vh' }} />}>
+              <SpeedOfLight />
+            </Suspense>
+          }
+        />
         <Route path="/blog/:slug" element={<PageFrame showFooter={false}><BlogPost /></PageFrame>} />
       </Routes>
     </ThemeProvider>

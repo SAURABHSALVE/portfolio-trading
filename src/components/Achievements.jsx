@@ -32,14 +32,14 @@ export default function Achievements() {
       </div>
       <div className="ach-grid">
         {achievements.map((a, i) => (
-          <div className="ach-card reveal" key={a.title}>
+          <div className="ach-card reveal" key={a.title} style={{ '--stagger': i }}>
             <div className="ach-card-header">
               <span className="ach-icon">{a.icon}</span>
               <span className="ach-stat">{a.stat}</span>
             </div>
             <div className="ach-org">{a.org}</div>
             <div className="ach-title">{a.title}</div>
-            <div className="ach-desc">{a.desc}</div>
+            <p className="ach-desc">{a.desc}</p>
             <div className="ach-index">ACH_0{i + 1}</div>
           </div>
         ))}

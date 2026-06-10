@@ -132,6 +132,7 @@ export default function BlogPost() {
     'Machine Learning': 'var(--accent2)',
     'Cloud / MLOps':    'var(--accent3)',
     'Project Log':      'var(--accent4)',
+    'Physics':          '#7c5cff',
   }
   const catColor = catColors[post.category] ?? 'var(--accent)'
 

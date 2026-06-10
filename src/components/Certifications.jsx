@@ -27,12 +27,18 @@ export default function Certifications() {
       </div>
       <div className="cert-grid">
         {certs.map((c, i) => (
-          <div className="cert-card reveal" key={c.name}>
-            <div className="cert-index">C_{String(i + 1).padStart(2, '0')}</div>
-            <div className="cert-badge">{c.badge}</div>
+          <div className="cert-card reveal" key={c.name} style={{ '--stagger': i % 6 }}>
+            <div className="cert-card-top">
+              <div className="cert-badge">{c.badge}</div>
+              <div className="cert-index">C_{String(i + 1).padStart(2, '0')}</div>
+            </div>
             <div className="cert-issuer">{c.issuer}</div>
             <div className="cert-name">{c.name}</div>
-            <div className="cert-skills">{c.skills}</div>
+            <div className="cert-skills">
+              {c.skills.split(' · ').map((s) => (
+                <span className="cert-skill-pill" key={s}>{s}</span>
+              ))}
+            </div>
           </div>
         ))}
       </div>

@@ -1,14 +1,10 @@
 import { useState } from 'react'
-import emailjs from '@emailjs/browser'
 
-// ── EMAILJS CONFIG ─────────────────────────────────────────────
-// 1. Go to https://emailjs.com → sign up free
-// 2. Add Email Service → connect your Gmail
-// 3. Create Email Template using: {{from_name}} {{from_email}} {{subject}} {{message}}
-// 4. Replace the three constants below with your real IDs
-const SERVICE_ID  = 'YOUR_SERVICE_ID'
-const TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
+// ── WEB3FORMS CONFIG ───────────────────────────────────────────
+// 1. Go to https://web3forms.com → enter your Gmail → get an Access Key
+//    (sent to your inbox instantly, no signup/template needed)
+// 2. Replace the value below with your real Access Key
+const ACCESS_KEY = '5bdd5c33-8bc9-46f9-8882-bb177c3ea946'
 // ──────────────────────────────────────────────────────────────
 
 const directLinks = [
@@ -29,41 +25,43 @@ export default function Contact() {
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const { fname, email, message } = form
     if (!fname || !email || !message) {
       setStatus({ msg: '⚠  Please fill in Name, Email, and Message.', type: 'error' })
       return
     }
-    if (PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
-      setStatus({ msg: '⚙  EmailJS not configured yet — see code comments.', type: 'error' })
+    if (ACCESS_KEY === 'YOUR_ACCESS_KEY') {
+      setStatus({ msg: '⚙  Form not configured yet — see code comments.', type: 'error' })
       return
     }
     setSending(true)
     setStatus({ msg: '', type: '' })
-    emailjs
-      .send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          from_name:  `${form.fname} ${form.lname}`,
-          from_email: form.email,
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          name:       `${form.fname} ${form.lname}`,
+          email:      form.email,
           subject:    form.subject || 'Portfolio Contact',
           message:    form.message,
-          reply_to:   form.email,
-        },
-        PUBLIC_KEY
-      )
-      .then(() => {
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
         setStatus({ msg: "✓ Message sent! I'll get back to you within 24 hours.", type: 'success' })
         setForm(INITIAL)
-        setTimeout(() => setSending(false), 5000)
-      })
-      .catch(() => {
-        setStatus({ msg: '✗ Failed. Please email me directly: saurabhsalve9999@gmail.com', type: 'error' })
-        setSending(false)
-      })
+      } else {
+        throw new Error(data.message)
+      }
+    } catch {
+      setStatus({ msg: '✗ Failed. Please email me directly: saurabhsalve9999@gmail.com', type: 'error' })
+    } finally {
+      setTimeout(() => setSending(false), 1000)
+    }
   }
 
   return (

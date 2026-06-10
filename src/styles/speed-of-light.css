@@ -1,0 +1,572 @@
+/* ============================================================
+   "What Happens as You Approach the Speed of Light?"
+   Cinematic interactive Special Relativity article
+   ============================================================ */
+
+.sol-page {
+  --sol-bg: #04050b;
+  --sol-accent: #5cd0ff;
+  --sol-accent2: #7c5cff;
+  --sol-red: #ff5c5c;
+  background: var(--sol-bg);
+  color: #eaf2ff;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.sol-back-link {
+  position: fixed;
+  top: 90px;
+  left: 24px;
+  z-index: 50;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: #aebfdc;
+  background: rgba(8, 12, 24, 0.55);
+  border: 1px solid rgba(124, 92, 255, 0.25);
+  padding: 8px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+.sol-back-link:hover {
+  color: var(--sol-accent);
+  border-color: var(--sol-accent);
+}
+
+/* ── Shared section scaffolding ─────────────────────────── */
+.sol-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  contain: layout paint;
+}
+
+.sol-content {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+  width: 100%;
+  text-align: center;
+}
+
+.sol-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sol-accent);
+  opacity: 0.85;
+  margin-bottom: 18px;
+}
+
+.sol-h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+
+.sol-section-sub {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: #aebfdc;
+  max-width: 620px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.sol-glow,
+.sol-glow-text {
+  color: var(--sol-accent);
+  text-shadow: 0 0 24px rgba(92, 208, 255, 0.55);
+}
+
+.sol-canvas-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+.sol-canvas-bg canvas { display: block; }
+
+/* Respect reduced-motion preference: drop heavy animations, keep content */
+@media (prefers-reduced-motion: reduce) {
+  .sol-canvas-bg canvas { display: none; }
+  .sol-clock-hand { animation: none !important; }
+  .sol-scroll-line { animation: none !important; }
+}
+
+/* ── Section 1: Hero ─────────────────────────────────────── */
+.sol-hero {
+  min-height: 100vh;
+  padding: 0;
+  border-bottom: none;
+}
+
+.sol-hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at 50% 30%, #0c1430 0%, #04050b 70%);
+}
+
+.sol-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.sol-nebula--1 {
+  width: 480px; height: 480px;
+  top: 8%; left: 8%;
+  background: radial-gradient(circle, var(--sol-accent2), transparent 70%);
+}
+.sol-nebula--2 {
+  width: 560px; height: 560px;
+  bottom: 5%; right: 5%;
+  background: radial-gradient(circle, var(--sol-accent), transparent 70%);
+}
+
+.sol-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.sol-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sol-accent2);
+  margin-bottom: 24px;
+}
+
+.sol-hero-title {
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+}
+
+.sol-hero-sub {
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  color: #aebfdc;
+  margin: 0 0 64px;
+}
+
+.sol-scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #5d7299;
+}
+.sol-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--sol-accent), transparent);
+  animation: sol-scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes sol-scroll-pulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ── Section 2: Speed Control ───────────────────────────── */
+.sol-speed { background: #050810; }
+
+.sol-shift {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.sol-shift--blue {
+  background: radial-gradient(ellipse at 80% 50%, rgba(92, 208, 255, 0.5), transparent 60%);
+}
+.sol-shift--red {
+  background: radial-gradient(ellipse at 20% 50%, rgba(255, 92, 92, 0.4), transparent 60%);
+}
+.sol-warp-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 40%, #04050b 100%);
+  transition: opacity 0.3s ease;
+}
+
+.sol-track-wrap {
+  margin: 0 auto 48px;
+  max-width: 640px;
+}
+
+.sol-track {
+  position: relative;
+  height: 120px;
+  border: 1px solid rgba(124, 92, 255, 0.2);
+  border-radius: 16px;
+  background: rgba(8, 12, 24, 0.5);
+  backdrop-filter: blur(6px);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.sol-track-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.sol-earth,
+.sol-rocket {
+  position: absolute;
+  top: 50%;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+.sol-earth {
+  left: 6%;
+  transform: translate(-50%, -50%);
+}
+.sol-rocket {
+  transition: left 0.05s linear, filter 0.1s linear, transform 0.1s linear;
+}
+
+.sol-slider {
+  width: 100%;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--sol-accent2), var(--sol-accent));
+  outline: none;
+  cursor: pointer;
+}
+.sol-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(92, 208, 255, 0.8);
+  cursor: pointer;
+}
+.sol-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(92, 208, 255, 0.8);
+  cursor: pointer;
+}
+
+.sol-readout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.sol-readout-grid--cinematic { max-width: 800px; }
+
+.sol-readout {
+  border: 1px solid rgba(124, 92, 255, 0.2);
+  background: rgba(8, 12, 24, 0.5);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 16px 14px;
+}
+.sol-readout-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6d83ab;
+  margin-bottom: 8px;
+}
+.sol-readout-val {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #eaf2ff;
+}
+
+/* ── Section 3: Time Dilation ───────────────────────────── */
+.sol-time { background: #04060e; }
+
+.sol-clocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 56px;
+  margin-bottom: 40px;
+}
+
+.sol-clock { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+.sol-clock-face {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid rgba(124, 92, 255, 0.3);
+  background: rgba(8, 12, 24, 0.6);
+  box-shadow: 0 0 30px rgba(124, 92, 255, 0.15) inset;
+}
+.sol-clock--accent .sol-clock-face {
+  border-color: rgba(92, 208, 255, 0.45);
+  box-shadow: 0 0 30px rgba(92, 208, 255, 0.25) inset;
+}
+
+.sol-clock-tick {
+  position: absolute;
+  background: #4a5d82;
+}
+.sol-clock-tick--12, .sol-clock-tick--6 {
+  left: 50%; width: 2px; height: 10px; transform: translateX(-50%);
+}
+.sol-clock-tick--12 { top: 6px; }
+.sol-clock-tick--6 { bottom: 6px; }
+.sol-clock-tick--3, .sol-clock-tick--9 {
+  top: 50%; height: 2px; width: 10px; transform: translateY(-50%);
+}
+.sol-clock-tick--3 { right: 6px; }
+.sol-clock-tick--9 { left: 6px; }
+
+.sol-clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 2px;
+  height: 56px;
+  background: var(--sol-accent);
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(0deg);
+  animation: sol-clock-spin linear infinite;
+  box-shadow: 0 0 8px var(--sol-accent);
+}
+.sol-clock--accent .sol-clock-hand { background: var(--sol-accent2); box-shadow: 0 0 8px var(--sol-accent2); }
+
+@keyframes sol-clock-spin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+
+.sol-clock-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+
+.sol-clock-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: #aebfdc;
+}
+
+.sol-gamma-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+.sol-gamma-formula {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  color: #aebfdc;
+}
+.sol-gamma-value {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--sol-accent);
+}
+
+/* ── Section 4: Length Contraction ──────────────────────── */
+.sol-length { background: #050810; }
+
+.sol-distance-track {
+  position: relative;
+  height: 6px;
+  max-width: 600px;
+  margin: 0 auto 80px;
+  background: rgba(124, 92, 255, 0.15);
+  border-radius: 999px;
+}
+.sol-distance-line {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--sol-accent2), var(--sol-accent));
+  transition: width 0.05s linear;
+}
+.sol-planet {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%);
+  transition: left 0.05s linear;
+}
+.sol-planet--earth { left: 0; }
+.sol-planet--moon { left: 100%; }
+.sol-planet-icon { font-size: 2.2rem; }
+.sol-planet-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #aebfdc;
+  white-space: nowrap;
+}
+
+/* ── Section 5: Relativity Grid ─────────────────────────── */
+.sol-grid { background: #03040a; }
+.sol-grid .sol-content { pointer-events: none; }
+
+/* ── Section 6: Cinematic light-speed sequence ──────────── */
+.sol-cinematic {
+  background: #02030a;
+}
+.sol-cinematic-canvas { z-index: 0; }
+.sol-cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(circle at center, transparent 30%, #02030a 100%);
+  pointer-events: none;
+}
+.sol-cinematic-content { position: relative; z-index: 2; }
+.sol-cinematic-title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  margin-bottom: 48px;
+}
+
+/* ── Section 7: Scenarios ───────────────────────────────── */
+.sol-scenarios { background: #04060e; }
+
+.sol-scenario-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.sol-scenario-btn {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: #aebfdc;
+  background: rgba(8, 12, 24, 0.6);
+  border: 1px solid rgba(124, 92, 255, 0.25);
+  border-radius: 999px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sol-scenario-btn:hover {
+  border-color: var(--sol-accent);
+  color: #fff;
+}
+.sol-scenario-btn.active {
+  background: linear-gradient(135deg, var(--sol-accent2), var(--sol-accent));
+  border-color: transparent;
+  color: #04050b;
+  font-weight: 700;
+}
+
+/* ── Section 8: Finale ──────────────────────────────────── */
+.sol-finale {
+  background: radial-gradient(ellipse at 50% 100%, rgba(124, 92, 255, 0.12), #02030a 70%);
+  border-bottom: none;
+}
+.sol-finale-title { margin-bottom: 16px; }
+
+.sol-finale-track {
+  position: relative;
+  height: 4px;
+  max-width: 600px;
+  margin: 0 auto 48px;
+  background: rgba(124, 92, 255, 0.15);
+  border-radius: 999px;
+}
+.sol-finale-rocket {
+  position: absolute;
+  top: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+  transition: left 0.05s linear;
+}
+.sol-finale-c-marker {
+  position: absolute;
+  top: 50%;
+  right: -28px;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--sol-accent);
+  text-shadow: 0 0 16px var(--sol-accent);
+}
+
+.sol-finale-quote {
+  margin: 56px auto 0;
+  max-width: 640px;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-style: italic;
+  color: #d6e2f7;
+  line-height: 1.7;
+  border: none;
+  padding: 0;
+}
+.sol-finale-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--sol-accent2);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .sol-section { padding: 70px 18px; min-height: auto; }
+  .sol-track { height: 100px; }
+  .sol-earth, .sol-rocket { font-size: 2rem; }
+  .sol-clocks { gap: 32px; }
+  .sol-clock-face { width: 110px; height: 110px; }
+  .sol-clock-hand { height: 44px; }
+}

@@ -56,6 +56,7 @@ const catColor = {
   'Machine Learning':'var(--accent2)',
   'Cloud / MLOps':   'var(--accent3)',
   'Project Log':     'var(--accent4)',
+  'Physics':         '#7c5cff',
 }
 
 function CategoryBadge({ cat }) {
@@ -259,16 +260,40 @@ export default function BlogList() {
   )
 }
 
+// Same Web3Forms access key used by the Contact form (saurabhsalve9999@gmail.com)
+const NEWSLETTER_ACCESS_KEY = '5bdd5c33-8bc9-46f9-8882-bb177c3ea946'
+
 function Newsletter() {
   const [name, setName]     = useState('')
   const [email, setEmail]   = useState('')
   const [status, setStatus] = useState('')
+  const [sending, setSending] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!name || !email) { setStatus('error'); return }
-    setStatus('success')
-    setName(''); setEmail('')
+    setSending(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: NEWSLETTER_ACCESS_KEY,
+          subject: 'New Newsletter Subscriber',
+          name,
+          email,
+          message: `${name} (${email}) subscribed to the blog newsletter.`,
+        }),
+      })
+      const data = await res.json()
+      if (!data.success) throw new Error(data.message)
+      setStatus('success')
+      setName(''); setEmail('')
+    } catch {
+      setStatus('error')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -291,12 +316,14 @@ function Newsletter() {
           className="nl-input" type="email" placeholder="your@email.com"
           value={email} onChange={(e) => setEmail(e.target.value)}
         />
-        <button className="nl-btn" type="submit">Subscribe →</button>
+        <button className="nl-btn" type="submit" disabled={sending}>
+          {sending ? 'Subscribing...' : 'Subscribe →'}
+        </button>
         {status === 'success' && (
-          <p className="nl-status success">✓ You&apos;re on the list. Thanks {name}!</p>
+          <p className="nl-status success">✓ You&apos;re on the list. Thanks{name ? `, ${name}` : ''}!</p>
         )}
         {status === 'error' && (
-          <p className="nl-status error">⚠ Please enter your name and email.</p>
+          <p className="nl-status error">⚠ Please enter your name and email, or try again.</p>
         )}
       </form>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const FILTERS = [
   { key: 'all',       label: 'All' },
@@ -49,6 +49,7 @@ const projects = [
     desc: 'Production-ready inference API serving a fine-tuned ResNet50 model for real-time plant disease diagnosis. Dockerized for portability. Optimized preprocessing pipeline with augmentation handles high-concurrency requests.',
     links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE/plant-disease-detection' }],
     inlineStat: { num: '98%', label: 'Validation Accuracy' },
+    tags: ['ResNet50', 'FastAPI', 'Docker', 'PyTorch'],
   },
   {
     num: '05',
@@ -76,6 +77,7 @@ const projects = [
     desc: 'End-to-end ML solution predicting customer churn with ANNs. Full preprocessing pipeline, early stopping & dropout for robustness, TensorBoard experiment logging, and live interactive Streamlit UI.',
     links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
     inlineStat: { num: '83%', label: 'Churn Prediction Accuracy' },
+    tags: ['TensorFlow', 'ANN', 'Streamlit', 'TensorBoard'],
   },
   {
     num: '08',
@@ -84,7 +86,7 @@ const projects = [
     sub: 'Random Forest · Plotly · yfinance · Streamlit',
     desc: '30-day stock price forecasting for U.S. and Indian markets. Integrates SMA, EMA, RSI, and MACD technical indicators. Interactive Plotly charts for historical & future trend exploration with real-time data via yfinance.',
     links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
-    tags: ['scikit-learn', 'yfinance', 'Plotly'],
+    tags: ['scikit-learn', 'yfinance', 'Plotly', 'Streamlit'],
   },
   {
     num: '09',
@@ -106,12 +108,12 @@ const projects = [
   },
 ]
 
-function ProjectCard({ project, visible }) {
+function ProjectCard({ project, visible, onOpen }) {
   if (!visible) return null
 
   if (project.featured) {
     return (
-      <div className="project-card featured reveal">
+      <div className="project-card featured reveal" onClick={() => onOpen(project)}>
         <div>
           <div className="proj-num">{project.num}</div>
           <div className="proj-header">
@@ -122,8 +124,9 @@ function ProjectCard({ project, visible }) {
           <p className="proj-desc">{project.desc}</p>
           <div className="proj-links">
             {project.links.map((l) => (
-              <a key={l.label} href={l.href} className="proj-link" target="_blank" rel="noreferrer">{l.label}</a>
+              <a key={l.label} href={l.href} className="proj-link" target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>{l.label}</a>
             ))}
+            <span className="proj-link proj-link--ghost">View Details ↗</span>
           </div>
           <div className="skill-tags" style={{ marginTop: '16px' }}>
             {project.tags?.map((t) => <span className="tag" key={t}>{t}</span>)}
@@ -144,7 +147,7 @@ function ProjectCard({ project, visible }) {
   }
 
   return (
-    <div className="project-card reveal">
+    <div className="project-card reveal" onClick={() => onOpen(project)}>
       <div className="proj-num">{project.num}</div>
       <div className="proj-header">
         <div className="proj-title">{project.title}</div>
@@ -160,8 +163,9 @@ function ProjectCard({ project, visible }) {
       )}
       <div className="proj-links" style={{ marginTop: project.inlineStat ? '12px' : '16px' }}>
         {project.links.map((l) => (
-          <a key={l.label} href={l.href} className="proj-link" target="_blank" rel="noreferrer">{l.label}</a>
+          <a key={l.label} href={l.href} className="proj-link" target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>{l.label}</a>
         ))}
+        <span className="proj-link proj-link--ghost">Details ↗</span>
       </div>
       {project.tags && (
         <div className="skill-tags" style={{ marginTop: '14px' }}>
@@ -172,8 +176,70 @@ function ProjectCard({ project, visible }) {
   )
 }
 
+function ProjectModal({ project, onClose }) {
+  useEffect(() => {
+    if (!project) return
+
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [project, onClose])
+
+  if (!project) return null
+
+  return (
+    <div className="proj-modal-overlay" onClick={onClose}>
+      <div className="proj-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="proj-modal-close" onClick={onClose} aria-label="Close">×</button>
+
+        <div className="proj-modal-num">{project.num}</div>
+        <h3 className="proj-modal-title">{project.title}</h3>
+        <div className="proj-modal-sub">{project.sub}</div>
+
+        {(project.stats || project.inlineStat) && (
+          <div className="proj-modal-stats">
+            {project.stats?.map((s) => (
+              <div className="proj-modal-stat" key={s.label}>
+                <div className="proj-modal-stat-num">{s.num}</div>
+                <div className="proj-modal-stat-label">{s.label}</div>
+              </div>
+            ))}
+            {project.inlineStat && (
+              <div className="proj-modal-stat">
+                <div className="proj-modal-stat-num">{project.inlineStat.num}</div>
+                <div className="proj-modal-stat-label">{project.inlineStat.label}</div>
+              </div>
+            )}
+          </div>
+        )}
+
+        <p className="proj-modal-desc">{project.desc}</p>
+
+        {project.tags && (
+          <div className="skill-tags" style={{ marginBottom: '24px' }}>
+            {project.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+          </div>
+        )}
+
+        <div className="proj-modal-links">
+          {project.links.map((l) => (
+            <a key={l.label} href={l.href} className="proj-link proj-link--lg" target="_blank" rel="noreferrer">
+              {l.label.replace('→', '').trim()} ↗
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Projects() {
   const [active, setActive] = useState('all')
+  const [selected, setSelected] = useState(null)
 
   return (
     <section id="projects" className="section-border">
@@ -199,9 +265,12 @@ export default function Projects() {
             key={p.num}
             project={p}
             visible={active === 'all' || p.cat.includes(active)}
+            onOpen={setSelected}
           />
         ))}
       </div>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   )
 }
