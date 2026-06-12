@@ -110,10 +110,6 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-@keyframes scanLine {
-  0%   { top: -2px; }
-  100% { top: 100%; }
-}
 @keyframes glitch {
   0%   { clip-path: inset(40% 0 61% 0); transform: skew(-0.1deg); }
   20%  { clip-path: inset(92% 0 1% 0);  transform: skew(0.3deg); }
@@ -361,18 +357,6 @@ nav.nav-scrolled {
   box-shadow: 0 1px 0 0 var(--accent), var(--shadow);
 }
 
-/* Scan line animation on scrolled nav */
-nav.nav-scrolled::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  bottom: -1px;
-  animation: scanLine 3s linear infinite;
-  opacity: 0.6;
-}
 
 .nav-logo {
   font-family: var(--font-mono);
