@@ -1,10 +1,8 @@
 import { useState } from 'react'
 
-// ── WEB3FORMS CONFIG ───────────────────────────────────────────
-// 1. Go to https://web3forms.com → enter your Gmail → get an Access Key
-//    (sent to your inbox instantly, no signup/template needed)
-// 2. Replace the value below with your real Access Key
-const ACCESS_KEY = '5bdd5c33-8bc9-46f9-8882-bb177c3ea946'
+// ── FORMSPREE CONFIG ─────────────────────────────────────────
+// Form ID: xpqeykyz (emails go to saurabhsalve9999@gmail.com)
+const FORM_ID = 'xpqeykyz'
 // ──────────────────────────────────────────────────────────────
 
 const directLinks = [
@@ -32,31 +30,28 @@ export default function Contact() {
       setStatus({ msg: '⚠  Please fill in Name, Email, and Message.', type: 'error' })
       return
     }
-    if (ACCESS_KEY === 'YOUR_ACCESS_KEY') {
+    if (FORM_ID === 'YOUR_FORMSPREE_ID') {
       setStatus({ msg: '⚙  Form not configured yet — see code comments.', type: 'error' })
       return
     }
     setSending(true)
     setStatus({ msg: '', type: '' })
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: ACCESS_KEY,
-          to_email: 'saurabhsalve9999@gmail.com',
-          name:       `${form.fname} ${form.lname}`,
-          email:      form.email,
-          subject:    form.subject || 'Portfolio Contact',
-          message:    form.message,
+          name:    `${form.fname} ${form.lname}`,
+          email:   form.email,
+          subject: form.subject || 'Portfolio Contact',
+          message: form.message,
         }),
       })
-      const data = await res.json()
-      if (data.success) {
+      if (res.ok) {
         setStatus({ msg: "✓ Message sent! I'll get back to you within 24 hours.", type: 'success' })
         setForm(INITIAL)
       } else {
-        throw new Error(data.message)
+        throw new Error('Form submission failed')
       }
     } catch {
       setStatus({ msg: '✗ Failed. Please email me directly: saurabhsalve9999@gmail.com', type: 'error' })
