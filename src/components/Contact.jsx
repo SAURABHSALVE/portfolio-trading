@@ -44,6 +44,7 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: ACCESS_KEY,
+          to_email: 'saurabhsalve9999@gmail.com',
           name:       `${form.fname} ${form.lname}`,
           email:      form.email,
           subject:    form.subject || 'Portfolio Contact',
