@@ -1122,9 +1122,9 @@ nav.nav-scrolled {
 .proj-zigzag-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 32px;
   align-items: center;
-  padding: 32px;
+  padding: 28px;
 }
 
 /* Left align: image on left, content on right */
@@ -1147,7 +1147,7 @@ nav.nav-scrolled {
 
 .proj-image-container.zigzag {
   position: relative;
-  height: 320px;
+  height: 260px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -1174,7 +1174,7 @@ nav.nav-scrolled {
 .proj-zigzag-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .proj-badge {
@@ -1199,37 +1199,37 @@ nav.nav-scrolled {
 }
 
 .proj-title.zigzag {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--text);
   line-height: 1.2;
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 .proj-subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--accent);
   font-weight: 600;
 }
 
 .proj-tech {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--text2);
   letter-spacing: 0.05em;
 }
 
 .proj-summary {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text2);
-  line-height: 1.7;
-  margin: 12px 0;
+  line-height: 1.6;
+  margin: 8px 0;
 }
 
 .proj-stats-row {
   display: flex;
-  gap: 32px;
-  margin: 20px 0;
+  gap: 24px;
+  margin: 12px 0;
 }
 
 .proj-stat-item {
@@ -1238,7 +1238,7 @@ nav.nav-scrolled {
 }
 
 .proj-stat-value {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--accent);
   text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
@@ -1247,15 +1247,15 @@ nav.nav-scrolled {
 
 .proj-stat-key {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .proj-action {
-  margin-top: 16px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1263,12 +1263,12 @@ nav.nav-scrolled {
 
 .proj-action-text {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border: 1px solid var(--accent);
   border-radius: var(--radius-sm);
   transition: all 0.2s;
@@ -3893,7 +3893,7 @@ footer {
 
   .proj-zigzag-wrapper {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
     padding: 20px;
   }
 
@@ -3903,7 +3903,15 @@ footer {
   }
 
   .proj-image-container.zigzag {
-    height: 240px;
+    height: 220px;
+  }
+
+  .proj-title.zigzag {
+    font-size: 1.4rem;
+  }
+
+  .proj-summary {
+    font-size: 0.85rem;
   }
 
   .proj-side { justify-content: flex-start; }

@@ -25,7 +25,7 @@ const projects = [
     image: '/youtube-rag.png',
     tech: 'RAG · LangChain · OpenAI GPT-4o · Streamlit',
     demo: 'https://watchless.streamlit.app/',
-    github: 'https://github.com/SAURABHSALVE',
+    github: 'https://github.com/SAURABHSALVE/ai-math-tutor-rag-system',
     features: [
       'RAG Technology: Provides accurate answers based only on video transcript',
       'Smart Memory: Chatbot remembers previous questions for natural conversation',
@@ -47,7 +47,7 @@ const projects = [
     image: '/math-wise.png',
     tech: 'LangGraph · Mistral OCR · GPT-4o · SymPy',
     demo: 'https://ai-math-wise.streamlit.app/',
-    github: 'https://github.com/SAURABHSALVE',
+    github: 'https://github.com/SAURABHSALVE/ai-math-tutor',
     features: [
       'Multimodal Input: Text, Image (GPT-4o Vision), Audio (Whisper API)',
       '6 LangGraph Agents: Each handling a specific task in the pipeline',
@@ -69,7 +69,7 @@ const projects = [
     image: '/shadow-board.png',
     tech: 'CrewAI · Google Gemini · FastAPI · React',
     demo: 'https://devils-advocate-black.vercel.app/',
-    github: 'https://github.com/SAURABHSALVE',
+    github: 'https://github.com/SAURABHSALVE/Devils-Advocate',
     features: [
       'Multi-Agent Debate: 5 AI executives debate from different perspectives',
       'Human-In-The-Loop: Pause mid-debate to challenge agents or redirect discussion',
@@ -81,13 +81,13 @@ const projects = [
   },
 
   /* ════════════════════════════════════════════════════════════════
-     REGULAR PROJECTS (3)
+     MORE FEATURED PROJECTS (2)
      ════════════════════════════════════════════════════════════════ */
   {
     id: 'plant-disease',
     num: '04',
-    featured: false,
-    cat: 'cv',
+    featured: true,
+    cat: 'cv featured',
     title: 'Plant Disease Detection',
     subtitle: 'Production-Grade Deep Learning System',
     summary: 'Production-ready deep learning system for precision agriculture. Fine-tuned ResNet50 detecting 38 disease classes with 98% accuracy.',
@@ -103,11 +103,37 @@ const projects = [
       'Dockerized & Portable: Runs identically on any system',
       'Production Ready: Gunicorn + Uvicorn for concurrent requests',
     ],
-    accuracy: '98%',
+    stats: { accuracy: '98%', classes: '38' },
   },
   {
-    id: 'blog-generator',
+    id: 'artisan-craft',
     num: '05',
+    featured: true,
+    cat: 'fullstack genai featured',
+    title: 'Artisan Craft Platform',
+    subtitle: 'AI + Blockchain for Handmade Crafts',
+    summary: 'Hackathon finalist. AI platform converting handmade crafts into NFT digital collectibles with storytelling, AR visualization, and artisan marketplace.',
+    description: 'AI-powered global platform bridging local artisans and global audience through OpenAI storytelling, Google Cloud infrastructure, and Blockchain minting. Each craft becomes a digital collectible with emotional storytelling and AR preview.',
+    image: '/repo2viral.png',
+    tech: 'Vertex AI · Blockchain · AR · React · Cloud Run',
+    github: 'https://github.com/SAURABHSALVE/genai-artisans',
+    youtube: 'https://youtu.be/EZZlAaDLxVQ',
+    features: [
+      'Cloud Photo Upload: Images to Google Cloud Storage with auto-optimization',
+      'AI Storytelling: Vertex AI + OpenAI generate emotional, cultural stories',
+      'Blockchain Minting: Stories minted as NFTs for authenticity and provenance',
+      'Augmented Reality: Preview crafts in AR before purchase',
+      'Direct Artisan Connection: Bypasses intermediaries, empowers creators',
+    ],
+    stats: { features: '5', status: 'Hackathon Finalist' },
+  },
+
+  /* ════════════════════════════════════════════════════════════════
+     REGULAR PROJECTS (2)
+     ════════════════════════════════════════════════════════════════ */
+  {
+    id: 'blog-generator',
+    num: '06',
     featured: false,
     cat: 'genai fullstack',
     title: 'Multi-Lingual Blog Generator',
@@ -125,28 +151,6 @@ const projects = [
       'Fast and user-friendly UI',
       'Easy copy and share functionality',
     ],
-  },
-  {
-    id: 'artisan-craft',
-    num: '06',
-    featured: false,
-    cat: 'fullstack genai',
-    title: 'Artisan Craft Platform',
-    subtitle: 'AI + Blockchain for Handmade Crafts',
-    summary: 'Hackathon finalist. AI platform converting handmade crafts into NFT digital collectibles with storytelling, AR visualization, and artisan marketplace.',
-    description: 'AI-powered global platform bridging local artisans and global audience through OpenAI storytelling, Google Cloud infrastructure, and Blockchain minting. Each craft becomes a digital collectible with emotional storytelling and AR preview.',
-    image: '/repo2viral.png',
-    tech: 'Vertex AI · Blockchain · AR · React · Cloud Run',
-    github: 'https://github.com/SAURABHSALVE/genai-artisans',
-    youtube: 'https://youtu.be/EZZlAaDLxVQ',
-    features: [
-      'Cloud Photo Upload: Images to Google Cloud Storage with auto-optimization',
-      'AI Storytelling: Vertex AI + OpenAI generate emotional, cultural stories',
-      'Blockchain Minting: Stories minted as NFTs for authenticity and provenance',
-      'Augmented Reality: Preview crafts in AR before purchase',
-      'Direct Artisan Connection: Bypasses intermediaries, empowers creators',
-    ],
-    stats: { demos: '3', status: 'Hackathon Finalist' },
   },
   {
     id: 'ai-image-studio',
