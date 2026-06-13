@@ -54,6 +54,17 @@ function Block({ block }) {
           <pre><code>{block.text}</code></pre>
         </div>
       )
+    case 'image':
+      return (
+        <figure className="article-image-figure">
+          <img
+            src={block.src}
+            alt={block.alt || 'Article illustration'}
+            className="article-image"
+          />
+          {block.caption && <figcaption className="article-image-caption">{block.caption}</figcaption>}
+        </figure>
+      )
     default:
       return null
   }

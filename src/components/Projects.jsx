@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 
 const FILTERS = [
-  { key: 'all',       label: 'All' },
+  { key: 'all',       label: 'All Projects' },
+  { key: 'featured',  label: '⭐ Featured' },
   { key: 'genai',     label: 'GenAI / LLM' },
   { key: 'cv',        label: 'Computer Vision' },
   { key: 'ml',        label: 'ML / Data' },
@@ -9,169 +10,204 @@ const FILTERS = [
 ]
 
 const projects = [
+  /* ════════════════════════════════════════════════════════════════
+     FEATURED PROJECTS (3)
+     ════════════════════════════════════════════════════════════════ */
   {
-    num: '01 — FEATURED',
+    id: 'watchless',
+    num: '01',
     featured: true,
-    cat: 'genai',
-    title: 'Agentic AI Image Studio',
-    sub: 'Multi-Agent Systems · PyTorch · Diffusers · LCM',
-    desc: 'Architected a Multi-Agent System with 9 specialized agents handling prompt refinement, quality control, and iterative improvement. Implemented Latent Consistency Models achieving 10x faster generation (4–8 steps) vs standard Stable Diffusion pipelines. Modular agent workflows with autonomous error handling.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE/image-generation' }],
-    tags: ['LCM Models', 'Multi-Agent', 'Stable Diffusion', 'PyTorch', 'Diffusers'],
-    stats: [{ num: '10x', label: 'Faster generation via LCM' }, { num: '9', label: 'Specialized AI agents' }],
-  },
-  {
-    num: '02',
-    cat: 'genai fullstack',
-    title: 'Repo2Viral — EdTech SaaS',
-    sub: 'GenAI · Next.js · FastAPI · OpenAI',
-    desc: 'Full-stack GenAI SaaS converting GitHub repositories into structured learning materials and social content using LLMs. Context-aware RAG pipeline for semantic code understanding. Deployed on Render + Netlify with Gumroad payment integration.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE/repo2viral' }],
-    tags: ['RAG', 'Next.js', 'FastAPI', 'OpenAI'],
-  },
-  {
-    num: '03',
-    cat: 'genai',
-    title: 'YouTube Bot — RAG Agent',
-    sub: 'RAG · LangChain · FAISS · OpenAI GPT-4',
-    desc: 'Conversational AI agent with PDF knowledge base + real-time web search. Features conversational memory, transparent reasoning chain, real-time token streaming, and hybrid retrieval — bridging static docs with live web data.',
-    links: [
-      { label: 'GitHub →', href: 'https://github.com/SAURABHSALVE/Youtube_Bot-RAG-' },
-      { label: 'Live Demo →', href: 'https://watchless.streamlit.app/' },
+    cat: 'genai featured',
+    title: 'WatchLess',
+    subtitle: 'YouTube RAG Chatbot',
+    summary: 'Chat with any YouTube video instantly using RAG technology. Extract insights, summarize content, and ask questions about video transcripts.',
+    description: 'WatchLess allows you to extract insights, summarize content, and ask specific questions about any YouTube video. Powered by LangChain, OpenAI GPT-4o, and Streamlit. Uses Retrieval-Augmented Generation to provide accurate answers based only on the video transcript. Smart memory remembers your previous questions for natural conversation flow.',
+    image: '/youtube-rag.png',
+    tech: 'RAG · LangChain · OpenAI GPT-4o · Streamlit',
+    demo: 'https://watchless.streamlit.app/',
+    github: 'https://github.com/SAURABHSALVE',
+    features: [
+      'RAG Technology: Provides accurate answers based only on video transcript',
+      'Smart Memory: Chatbot remembers previous questions for natural conversation',
+      'Multi-Language Support: Works with videos in 6+ languages',
+      'GPT-4o Powered: Superior reasoning and summarization',
+      'Modern UI: Clean dark-themed responsive interface',
     ],
-    tags: ['LangChain', 'FAISS', 'Tavily', 'Streamlit'],
+    stats: { chunks: '20+', languages: '6+' },
   },
   {
+    id: 'mathmentor',
+    num: '02',
+    featured: true,
+    cat: 'genai featured',
+    title: 'Math Mentor',
+    subtitle: 'AI-Powered JEE Tutor',
+    summary: 'Multimodal AI application solving JEE-style math problems with 6 LangGraph agents, OCR, human-in-the-loop verification, and SQLite memory.',
+    description: 'A production-grade AI math tutor that solves JEE-style problems using GPT-4o, LangGraph multi-agent orchestration, and advanced OCR. Supports text, image (Mistral OCR + EasyOCR), and audio (Whisper API) inputs. Features 6 specialized agents: Guardrail, Parser, Intent Router, Solver, Verifier, and Explainer.',
+    image: '/math-wise.png',
+    tech: 'LangGraph · Mistral OCR · GPT-4o · SymPy',
+    demo: 'https://ai-math-wise.streamlit.app/',
+    github: 'https://github.com/SAURABHSALVE',
+    features: [
+      'Multimodal Input: Text, Image (GPT-4o Vision), Audio (Whisper API)',
+      '6 LangGraph Agents: Each handling a specific task in the pipeline',
+      'RAG Pipeline: LangChain + FAISS for fast knowledge retrieval',
+      'Human-in-the-Loop: Triggers on low confidence or verification failures',
+      'Self-Learning: SQLite memory stores solutions, learns from corrections',
+    ],
+    stats: { agents: '6', accuracy: '95%' },
+  },
+  {
+    id: 'shadowboard',
+    num: '03',
+    featured: true,
+    cat: 'genai featured',
+    title: 'Shadow Board',
+    subtitle: 'AI Executive Decision Simulation',
+    summary: 'AI-powered executive boardroom simulation. 5 AI agents debate strategic decisions with real-time streaming, HITL intervention, and auto-generated strategy briefs.',
+    description: 'Shadow Board assembles a panel of AI executive agents — CFO, CMO, Legal Counsel, Devil\'s Advocate, and Moderator — to rigorously analyze your strategic questions from every angle. Multi-agent debate across 3 structured phases with real-time streaming and human-in-the-loop intervention.',
+    image: '/shadow-board.png',
+    tech: 'CrewAI · Google Gemini · FastAPI · React',
+    demo: 'https://devils-advocate-black.vercel.app/',
+    github: 'https://github.com/SAURABHSALVE',
+    features: [
+      'Multi-Agent Debate: 5 AI executives debate from different perspectives',
+      'Human-In-The-Loop: Pause mid-debate to challenge agents or redirect discussion',
+      'Real-Time Streaming: Watch debate unfold live via Server-Sent Events',
+      'Domain-Specific Boards: Customize for Tech, Healthcare, Finance, Retail',
+      'Strategy Brief PDF: Auto-generated with board votes, risk matrix, recommendations',
+    ],
+    stats: { agents: '5', phases: '3' },
+  },
+
+  /* ════════════════════════════════════════════════════════════════
+     REGULAR PROJECTS (3)
+     ════════════════════════════════════════════════════════════════ */
+  {
+    id: 'plant-disease',
     num: '04',
+    featured: false,
     cat: 'cv',
-    title: 'Plant Disease Detection API',
-    sub: 'Computer Vision · FastAPI · Docker · ResNet50',
-    desc: 'Production-ready inference API serving a fine-tuned ResNet50 model for real-time plant disease diagnosis. Dockerized for portability. Optimized preprocessing pipeline with augmentation handles high-concurrency requests.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE/plant-disease-detection' }],
-    inlineStat: { num: '98%', label: 'Validation Accuracy' },
-    tags: ['ResNet50', 'FastAPI', 'Docker', 'PyTorch'],
+    title: 'Plant Disease Detection',
+    subtitle: 'Production-Grade Deep Learning System',
+    summary: 'Production-ready deep learning system for precision agriculture. Fine-tuned ResNet50 detecting 38 disease classes with 98% accuracy.',
+    description: 'Dockerized web application for detecting plant diseases from leaf images using deep learning. Built with FastAPI, powered by a fine-tuned ResNet50, and featuring a beautiful glassmorphism UI. Fully containerized for portability.',
+    image: '/plant-disease-detection.png',
+    tech: 'ResNet50 · FastAPI · Docker · PyTorch',
+    github: 'https://github.com/SAURABHSALVE/plant-disease-detection',
+    docker: 'https://hub.docker.com/r/saurabhsalve/plant-disease-detection',
+    features: [
+      'Deep Learning: Fine-tuned ResNet50 CNN across 38 disease classes',
+      'Beautiful Frontend: Dark-theme UI with drag-and-drop image upload',
+      'FastAPI Backend: High-performance async Python framework',
+      'Dockerized & Portable: Runs identically on any system',
+      'Production Ready: Gunicorn + Uvicorn for concurrent requests',
+    ],
+    accuracy: '98%',
   },
   {
+    id: 'blog-generator',
     num: '05',
-    cat: 'cv ml',
-    title: 'MNIST Model Analysis',
-    sub: 'PyTorch · CNN / ANN / ProCNN · Streamlit',
-    desc: 'Built and benchmarked three architectures — ANN, CNN, and custom ProCNN (Batch Norm + Dropout). Ensemble prediction, PIL + OpenCV smart preprocessing, deployed to Streamlit Cloud with live accuracy dashboard.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE/pytorch-mnist' }],
-    tags: ['PyTorch', 'CNN', 'ANN', 'OpenCV', 'Streamlit'],
-  },
-  {
-    num: '06',
-    cat: 'genai',
+    featured: false,
+    cat: 'genai fullstack',
     title: 'Multi-Lingual Blog Generator',
-    sub: 'NLP · LLMs · Flask · Prompt Engineering',
-    desc: 'Scalable content engine using LLMs with advanced prompt engineering for structured JSON outputs (Title, Intro, Body). Language-agnostic logic ensures consistent formatting across all target languages.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
-    tags: ['Flask', 'LLMs', 'Prompt Eng.', 'NLP'],
+    subtitle: 'AI Content Engine for Global Reach',
+    summary: 'Full-stack AI content engine generating high-quality blog posts in multiple languages from a single prompt.',
+    description: 'Scalable content engine using LLMs with advanced prompt engineering for structured JSON outputs. Language-agnostic logic ensures consistent formatting across all target languages. Perfect for content creators, bloggers, and startups.',
+    image: '/aws.png',
+    tech: 'LLMs · Flask · Prompt Engineering · NLP',
+    github: 'https://github.com/SAURABHSALVE/AWS-blog-generator',
+    devpost: 'https://devpost.com/software/multilingual-blog-generator',
+    features: [
+      'Multi-language generation from single prompt',
+      'AI-powered content creation using LLMs',
+      'Structured output: title, intro, body, conclusion',
+      'Fast and user-friendly UI',
+      'Easy copy and share functionality',
+    ],
   },
   {
-    num: '07',
-    cat: 'ml',
-    title: 'Customer Churn Prediction',
-    sub: 'ANN · TensorFlow/Keras · Streamlit',
-    desc: 'End-to-end ML solution predicting customer churn with ANNs. Full preprocessing pipeline, early stopping & dropout for robustness, TensorBoard experiment logging, and live interactive Streamlit UI.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
-    inlineStat: { num: '83%', label: 'Churn Prediction Accuracy' },
-    tags: ['TensorFlow', 'ANN', 'Streamlit', 'TensorBoard'],
-  },
-  {
-    num: '08',
-    cat: 'ml',
-    title: 'Stock Market Prediction App',
-    sub: 'Random Forest · Plotly · yfinance · Streamlit',
-    desc: '30-day stock price forecasting for U.S. and Indian markets. Integrates SMA, EMA, RSI, and MACD technical indicators. Interactive Plotly charts for historical & future trend exploration with real-time data via yfinance.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
-    tags: ['scikit-learn', 'yfinance', 'Plotly', 'Streamlit'],
-  },
-  {
-    num: '09',
-    cat: 'fullstack genai',
-    title: 'AI Resume Analyzer',
-    sub: 'Django · OpenAI API · PythonAnywhere',
-    desc: 'AI-powered resume analysis accepting PDF, DOCX, and TXT formats. Custom Python scanning algorithm for deeper insight extraction. Deployed on PythonAnywhere with SQLite backend and structured recommendation output.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
-    tags: ['Django', 'OpenAI', 'SQLite', 'PDF/DOCX'],
-  },
-  {
-    num: '10',
+    id: 'artisan-craft',
+    num: '06',
+    featured: false,
     cat: 'fullstack genai',
     title: 'Artisan Craft Platform',
-    sub: 'Vertex AI · Blockchain · AR · React · Cloud Run',
-    desc: 'Hackathon finalist — AI platform converting handmade crafts into digital collectibles with NFT minting (ERC-721), AR visualization, AI storytelling via Vertex AI + OpenAI. Direct artisan-to-buyer marketplace on Google Cloud.',
-    links: [{ label: 'GitHub →', href: 'https://github.com/SAURABHSALVE' }],
-    tags: ['Vertex AI', 'Web3.py', 'React', 'Cloud Run', 'NFT'],
+    subtitle: 'AI + Blockchain for Handmade Crafts',
+    summary: 'Hackathon finalist. AI platform converting handmade crafts into NFT digital collectibles with storytelling, AR visualization, and artisan marketplace.',
+    description: 'AI-powered global platform bridging local artisans and global audience through OpenAI storytelling, Google Cloud infrastructure, and Blockchain minting. Each craft becomes a digital collectible with emotional storytelling and AR preview.',
+    image: '/repo2viral.png',
+    tech: 'Vertex AI · Blockchain · AR · React · Cloud Run',
+    github: 'https://github.com/SAURABHSALVE/genai-artisans',
+    youtube: 'https://youtu.be/EZZlAaDLxVQ',
+    features: [
+      'Cloud Photo Upload: Images to Google Cloud Storage with auto-optimization',
+      'AI Storytelling: Vertex AI + OpenAI generate emotional, cultural stories',
+      'Blockchain Minting: Stories minted as NFTs for authenticity and provenance',
+      'Augmented Reality: Preview crafts in AR before purchase',
+      'Direct Artisan Connection: Bypasses intermediaries, empowers creators',
+    ],
+    stats: { demos: '3', status: 'Hackathon Finalist' },
+  },
+  {
+    id: 'ai-image-studio',
+    num: '07',
+    featured: false,
+    cat: 'genai cv',
+    title: 'AI Image Studio',
+    subtitle: 'Multi-File Streamlit Toolkit for AI Image Generation',
+    summary: 'Fast, multi-file Streamlit toolkit for generating AI images using Latent Consistency Model. Features dedicated 3D model generation mode and random art creation.',
+    description: 'A comprehensive Streamlit-based image generation toolkit powered by the Latent Consistency Model (LCM) for ultra-fast generation. Includes three modes: enhanced app for full features, Colab-optimized version, and a tiny demo app. Special feature: "This 3D Model Does Not Exist" mode generates 4 angles with consistent seeds for 3D model creation. Optimized for speed with 4–8 steps recommended.',
+    image: '/image-generation.png',
+    tech: 'Streamlit · LCM · HuggingFace · Python',
+    demo: 'https://huggingface.co/spaces/SAURABHSALVE/ai-image-studio',
+    github: 'https://github.com/SAURABHSALVE/ai-image-studio',
+    features: [
+      'Fast Generation: Latent Consistency Model (LCM) generates images in 4-8 steps',
+      '3D Model Mode: "This 3D Model Does Not Exist" with consistent 4-angle generation',
+      'Random Art Creation: Automated artistic prompt generation and rendering',
+      'Multi-Platform: Works locally, on Colab, and with GPU acceleration',
+      'Optimized Settings: 256-512px sizes recommended for best speed/quality balance',
+    ],
+    stats: { modes: '3', speed: '4-8 steps' },
   },
 ]
 
-function ProjectCard({ project, visible, onOpen }) {
+function ProjectCard({ project, visible, onOpen, index }) {
   if (!visible) return null
 
-  if (project.featured) {
-    return (
-      <div className="project-card featured reveal" onClick={() => onOpen(project)}>
-        <div>
+  const isOdd = index % 2 === 0
+
+  return (
+    <div className={`project-card zigzag reveal ${isOdd ? 'zigzag-left' : 'zigzag-right'}`} onClick={() => onOpen(project)}>
+      <div className="proj-zigzag-wrapper">
+        {project.image && (
+          <div className="proj-image-container zigzag">
+            <img src={project.image} alt={project.title} className="proj-image zigzag" />
+            <div className="proj-image-overlay"></div>
+          </div>
+        )}
+        <div className="proj-zigzag-content">
+          {project.featured && <div className="proj-badge">Featured</div>}
           <div className="proj-num">{project.num}</div>
-          <div className="proj-header">
-            <div className="proj-title">{project.title}</div>
-            <span className="proj-arrow">↗</span>
-          </div>
-          <div className="proj-sub">{project.sub}</div>
-          <p className="proj-desc">{project.desc}</p>
-          <div className="proj-links">
-            {project.links.map((l) => (
-              <a key={l.label} href={l.href} className="proj-link" target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>{l.label}</a>
-            ))}
-            <span className="proj-link proj-link--ghost">View Details ↗</span>
-          </div>
-          <div className="skill-tags" style={{ marginTop: '16px' }}>
-            {project.tags?.map((t) => <span className="tag" key={t}>{t}</span>)}
-          </div>
-        </div>
-        <div className="proj-side">
-          <div>
-            {project.stats?.map((s) => (
-              <div key={s.label}>
-                <div className="proj-stat">{s.num}</div>
-                <div className="proj-stat-label" style={{ marginBottom: '24px' }}>{s.label}</div>
+          <h3 className="proj-title zigzag">{project.title}</h3>
+          <p className="proj-subtitle">{project.subtitle}</p>
+          <div className="proj-tech">{project.tech}</div>
+          <p className="proj-summary">{project.summary}</p>
+
+          <div className="proj-stats-row">
+            {project.stats && Object.entries(project.stats).map(([key, value]) => (
+              <div className="proj-stat-item" key={key}>
+                <div className="proj-stat-value">{value}</div>
+                <div className="proj-stat-key">{key}</div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-    )
-  }
 
-  return (
-    <div className="project-card reveal" onClick={() => onOpen(project)}>
-      <div className="proj-num">{project.num}</div>
-      <div className="proj-header">
-        <div className="proj-title">{project.title}</div>
-        <span className="proj-arrow">↗</span>
-      </div>
-      <div className="proj-sub">{project.sub}</div>
-      <p className="proj-desc">{project.desc}</p>
-      {project.inlineStat && (
-        <>
-          <div className="proj-stat">{project.inlineStat.num}</div>
-          <div className="proj-stat-label">{project.inlineStat.label}</div>
-        </>
-      )}
-      <div className="proj-links" style={{ marginTop: project.inlineStat ? '12px' : '16px' }}>
-        {project.links.map((l) => (
-          <a key={l.label} href={l.href} className="proj-link" target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>{l.label}</a>
-        ))}
-        <span className="proj-link proj-link--ghost">Details ↗</span>
-      </div>
-      {project.tags && (
-        <div className="skill-tags" style={{ marginTop: '14px' }}>
-          {project.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+          <div className="proj-action">
+            <span className="proj-action-text">View Details ↗</span>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }
@@ -191,44 +227,70 @@ function ProjectModal({ project, onClose }) {
 
   if (!project) return null
 
+  const links = [
+    { label: 'Live Demo', href: project.demo },
+    { label: 'GitHub', href: project.github },
+    { label: 'Docker Hub', href: project.docker },
+    { label: 'Devpost', href: project.devpost },
+    { label: 'YouTube', href: project.youtube },
+  ].filter(l => l.href)
+
   return (
     <div className="proj-modal-overlay" onClick={onClose}>
       <div className="proj-modal" onClick={(e) => e.stopPropagation()}>
         <button className="proj-modal-close" onClick={onClose} aria-label="Close">×</button>
 
-        <div className="proj-modal-num">{project.num}</div>
-        <h3 className="proj-modal-title">{project.title}</h3>
-        <div className="proj-modal-sub">{project.sub}</div>
-
-        {(project.stats || project.inlineStat) && (
-          <div className="proj-modal-stats">
-            {project.stats?.map((s) => (
-              <div className="proj-modal-stat" key={s.label}>
-                <div className="proj-modal-stat-num">{s.num}</div>
-                <div className="proj-modal-stat-label">{s.label}</div>
-              </div>
-            ))}
-            {project.inlineStat && (
-              <div className="proj-modal-stat">
-                <div className="proj-modal-stat-num">{project.inlineStat.num}</div>
-                <div className="proj-modal-stat-label">{project.inlineStat.label}</div>
-              </div>
-            )}
+        {project.image && (
+          <div className="proj-modal-image">
+            <img src={project.image} alt={project.title} />
           </div>
         )}
 
-        <p className="proj-modal-desc">{project.desc}</p>
+        <div className="proj-modal-header">
+          <div className="proj-modal-num">{project.num}</div>
+          <h2 className="proj-modal-title">{project.title}</h2>
+          <p className="proj-modal-subtitle">{project.subtitle}</p>
+        </div>
 
-        {project.tags && (
-          <div className="skill-tags" style={{ marginBottom: '24px' }}>
-            {project.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+        <div className="proj-modal-tech">
+          <span className="proj-tech-badge">{project.tech}</span>
+        </div>
+
+        <p className="proj-modal-description">{project.description}</p>
+
+        {project.stats && (
+          <div className="proj-modal-stats">
+            {Object.entries(project.stats).map(([key, value]) => (
+              <div className="proj-modal-stat" key={key}>
+                <div className="proj-modal-stat-num">{value}</div>
+                <div className="proj-modal-stat-label">{key}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {project.features && (
+          <div className="proj-modal-features">
+            <h4 className="proj-modal-features-title">✨ Key Features</h4>
+            <ul className="proj-modal-features-list">
+              {project.features.map((feature, i) => (
+                <li key={i}>{feature}</li>
+              ))}
+            </ul>
           </div>
         )}
 
         <div className="proj-modal-links">
-          {project.links.map((l) => (
-            <a key={l.label} href={l.href} className="proj-link proj-link--lg" target="_blank" rel="noreferrer">
-              {l.label.replace('→', '').trim()} ↗
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="proj-modal-link"
+              target="_blank"
+              rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {l.label} ↗
             </a>
           ))}
         </div>
@@ -259,13 +321,14 @@ export default function Projects() {
           </button>
         ))}
       </div>
-      <div className="projects-grid">
-        {projects.map((p) => (
+      <div className="projects-grid zigzag-container">
+        {projects.map((p, idx) => (
           <ProjectCard
             key={p.num}
             project={p}
             visible={active === 'all' || p.cat.includes(active)}
             onOpen={setSelected}
+            index={idx}
           />
         ))}
       </div>
