@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { BLOG_POSTS } from '../data/blogData'
 import { useScrollReveal } from '../hooks/useScrollReveal'
@@ -70,10 +70,33 @@ function CategoryBadge({ cat }) {
   )
 }
 
+function BlogToast({ isOpen, onClose }) {
+  useEffect(() => {
+    if (!isOpen) return
+    const timer = setTimeout(onClose, 6000) // Auto-dismiss after 6s
+    return () => clearTimeout(timer)
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  return (
+    <div className="blog-toast">
+      <div className="blog-toast-badge">📖 NEW</div>
+      <div className="blog-toast-content">
+        <h4 className="blog-toast-title">
+          <span className="blog-toast-accent">NLP Explained</span>
+        </h4>
+        <p className="blog-toast-text">How computers understand language. <Link to="/blog/natural-language-processing-nlp">Read now →</Link></p>
+      </div>
+    </div>
+  )
+}
+
 export default function BlogList() {
   useScrollReveal()
   const [active, setActive] = useState('all')
   const [animKey, setAnimKey] = useState(0)
+  const [showBlogToast, setShowBlogToast] = useState(false)
 
   const featured = BLOG_POSTS.find((p) => p.featured)
   const regular  = BLOG_POSTS.filter((p) => !p.featured)
@@ -86,6 +109,38 @@ export default function BlogList() {
     setAnimKey((k) => k + 1)   // re-trigger CSS stagger animations
   }
 
+  // Blog toast: show immediately, then every 30 seconds for 10 minutes
+  useEffect(() => {
+    const startTime = Date.now()
+    const DURATION_TOTAL = 10 * 60 * 1000 // 10 minutes
+    const SHOW_DURATION = 2000 // 2 seconds per toast
+    const HIDE_DURATION = 30000 // 30 seconds between shows
+
+    let timeoutId
+
+    const scheduleBlogToast = () => {
+      const elapsed = Date.now() - startTime
+
+      // Stop after 10 minutes
+      if (elapsed > DURATION_TOTAL) {
+        setShowBlogToast(false)
+        return
+      }
+
+      // Show toast for 2 seconds
+      setShowBlogToast(true)
+      timeoutId = setTimeout(() => {
+        setShowBlogToast(false)
+        // Schedule next show after 30 seconds
+        timeoutId = setTimeout(scheduleBlogToast, HIDE_DURATION)
+      }, SHOW_DURATION)
+    }
+
+    // Start immediately
+    scheduleBlogToast()
+    return () => clearTimeout(timeoutId)
+  }, [])
+
   /* Count per category for badge */
   const countFor = (cat) => cat === 'all'
     ? regular.length
@@ -93,6 +148,8 @@ export default function BlogList() {
 
   return (
     <>
+      <BlogToast isOpen={showBlogToast} onClose={() => setShowBlogToast(false)} />
+
       {/* ── HEADER ──────────────────────────────────────────────── */}
       <div className="blog-header-wrap">
         <div className="blog-bg-text" aria-hidden="true">BLOG</div>

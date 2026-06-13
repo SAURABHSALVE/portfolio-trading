@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const FILTERS = [
   { key: 'all',       label: 'All Projects' },
@@ -11,7 +11,7 @@ const FILTERS = [
 
 const projects = [
   /* ════════════════════════════════════════════════════════════════
-     FEATURED PROJECTS (3)
+     FEATURED PROJECTS (6)
      ════════════════════════════════════════════════════════════════ */
   {
     id: 'watchless',
@@ -80,9 +80,6 @@ const projects = [
     stats: { agents: '5', phases: '3' },
   },
 
-  /* ════════════════════════════════════════════════════════════════
-     MORE FEATURED PROJECTS (2)
-     ════════════════════════════════════════════════════════════════ */
   {
     id: 'plant-disease',
     num: '04',
@@ -106,26 +103,54 @@ const projects = [
     stats: { accuracy: '98%', classes: '38' },
   },
   {
-    id: 'artisan-craft',
+    id: 'repo2viral',
     num: '05',
     featured: true,
     cat: 'fullstack genai featured',
-    title: 'Artisan Craft Platform',
-    subtitle: 'AI + Blockchain for Handmade Crafts',
-    summary: 'Hackathon finalist. AI platform converting handmade crafts into NFT digital collectibles with storytelling, AR visualization, and artisan marketplace.',
-    description: 'AI-powered global platform bridging local artisans and global audience through OpenAI storytelling, Google Cloud infrastructure, and Blockchain minting. Each craft becomes a digital collectible with emotional storytelling and AR preview.',
+    title: 'Repo2Viral',
+    subtitle: 'Code to Content, In Seconds',
+    summary: 'AI platform that analyzes GitHub repositories and generates viral Twitter threads, LinkedIn posts, and SEO-optimized blogs instantly.',
+    description: 'Stop wasting hours writing threads. Repo2Viral analyzes your GitHub repository and generates viral Twitter threads, LinkedIn carousels, and technical blogs instantly. Our deep code understanding scans file structure, dependencies, and comments for accuracy, then generates platform-specific content with customizable tones: Senior Architect, Hype Man, or Helpful Educator.',
     image: '/repo2viral.png',
-    tech: 'Vertex AI · Blockchain · AR · React · Cloud Run',
-    github: 'https://github.com/SAURABHSALVE/genai-artisans',
-    youtube: 'https://youtu.be/EZZlAaDLxVQ',
+    tech: 'Next.js · OpenAI GPT-4 · MongoDB · React · Netlify',
+    demo: 'https://repo2viral.netlify.app/',
+    github: 'https://github.com/SAURABHSALVE/repo2viral',
     features: [
-      'Cloud Photo Upload: Images to Google Cloud Storage with auto-optimization',
-      'AI Storytelling: Vertex AI + OpenAI generate emotional, cultural stories',
-      'Blockchain Minting: Stories minted as NFTs for authenticity and provenance',
-      'Augmented Reality: Preview crafts in AR before purchase',
-      'Direct Artisan Connection: Bypasses intermediaries, empowers creators',
+      'Multi-Platform Ready: Generate tailored content for Twitter, LinkedIn, and Technical Blogs simultaneously',
+      'Deep Code Understanding: Scans file structure, dependencies, and code comments for accuracy',
+      'Instant Carousels: Beautiful, exportable PDF carousels for LinkedIn with zero design skills',
+      'Technical Accuracy: Cites specific files and lines of code to back up every claim',
+      'SEO Optimized Blogs: 1,000+ word technical tutorials with code snippets and meta tags',
+      'Tone Customization: Choose from Senior Architect, Hype Man, or Helpful Educator personas',
     ],
-    stats: { features: '5', status: 'Hackathon Finalist' },
+    stats: { repos: '10,000+', posts: '75k+' },
+  },
+  {
+    id: 'artisan-craft',
+    num: '06',
+    featured: true,
+    cat: 'fullstack genai blockchain featured',
+    title: 'Digital Souls for Handmade Creations',
+    subtitle: 'AI + Blockchain Platform for Artisans',
+    summary: 'An AI-powered platform transforming handmade crafts into digital NFT collectibles with emotional storytelling, AR preview, and direct artisan connection.',
+    description: 'Artisan Craft Platform bridges local artisans and global audiences by fusing AI + Cloud + Blockchain. Each handmade craft is transformed into a unique digital collectible with emotional storytelling using Vertex AI & OpenAI, secure Google Cloud storage, and Ethereum NFT minting. Demonstrates full production-grade architecture combining deep learning, cloud infrastructure, and blockchain technology.',
+    image: '/genai-artisan.png',
+    tech: 'Vertex AI · OpenAI · Flask · Cloud SQL · GCS · Web3.py · React · Ethereum',
+    links: [
+      { label: 'Full Demo', href: 'https://youtu.be/EZZlAaDLxVQ?si=XG1r4Jt8Y4G9Msnj', color: 'cyan' },
+      { label: 'AR Visualization', href: 'https://youtu.be/cQNGJm1eRd0', color: 'purple' },
+      { label: 'Blockchain Demo', href: 'https://youtu.be/tDBTcvJVFIk', color: 'orange' },
+      { label: 'GitHub', href: 'https://github.com/SAURABHSALVE/genai-artisans', color: 'green' },
+    ],
+    features: [
+      'Cloud Photo Upload: Craft photos auto-optimized and stored in Google Cloud Storage buckets',
+      'AI Storytelling: Vertex AI & OpenAI generate emotional, cultural, and creative narratives',
+      'Blockchain NFT Minting: Stories minted as ERC-721 NFTs on Ethereum (Sepolia testnet)',
+      'Augmented Reality Preview: View handmade crafts in AR to experience digital presence',
+      'Direct Artisan Connection: Bypasses intermediaries, empowers artisans with full control',
+      'End-to-End Production: Fully functional architecture with Cloud Run deployment and live demos',
+    ],
+    stats: { features: '6', status: 'Hackathon Demo' },
   },
 
   /* ════════════════════════════════════════════════════════════════
@@ -133,7 +158,7 @@ const projects = [
      ════════════════════════════════════════════════════════════════ */
   {
     id: 'blog-generator',
-    num: '06',
+    num: '07',
     featured: false,
     cat: 'genai fullstack',
     title: 'Multi-Lingual Blog Generator',
@@ -154,7 +179,7 @@ const projects = [
   },
   {
     id: 'ai-image-studio',
-    num: '07',
+    num: '08',
     featured: false,
     cat: 'genai cv',
     title: 'AI Image Studio',
@@ -180,9 +205,14 @@ function ProjectCard({ project, visible, onOpen, index }) {
   if (!visible) return null
 
   const isOdd = index % 2 === 0
+  const animationDelay = `${index * 0.15}s`
 
   return (
-    <div className={`project-card zigzag reveal ${isOdd ? 'zigzag-left' : 'zigzag-right'}`} onClick={() => onOpen(project)}>
+    <div
+      className={`project-card zigzag reveal ${isOdd ? 'zigzag-left' : 'zigzag-right'}`}
+      onClick={() => onOpen(project)}
+      style={{ animationDelay: animationDelay }}
+    >
       <div className="proj-zigzag-wrapper">
         {project.image && (
           <div className="proj-image-container zigzag">
@@ -231,12 +261,12 @@ function ProjectModal({ project, onClose }) {
 
   if (!project) return null
 
-  const links = [
-    { label: 'Live Demo', href: project.demo },
-    { label: 'GitHub', href: project.github },
-    { label: 'Docker Hub', href: project.docker },
-    { label: 'Devpost', href: project.devpost },
-    { label: 'YouTube', href: project.youtube },
+  const links = project.links || [
+    { label: 'Live Demo', href: project.demo, color: 'cyan' },
+    { label: 'GitHub', href: project.github, color: 'green' },
+    { label: 'Docker Hub', href: project.docker, color: 'purple' },
+    { label: 'Devpost', href: project.devpost, color: 'orange' },
+    { label: 'YouTube', href: project.youtube, color: 'orange' },
   ].filter(l => l.href)
 
   return (
@@ -289,7 +319,7 @@ function ProjectModal({ project, onClose }) {
             <a
               key={l.label}
               href={l.href}
-              className="proj-modal-link"
+              className={`proj-modal-link link-${l.color || 'cyan'}`}
               target="_blank"
               rel="noreferrer"
               onClick={(e) => e.stopPropagation()}
@@ -303,12 +333,66 @@ function ProjectModal({ project, onClose }) {
   )
 }
 
+function WIPToast({ isOpen, onClose, position = 'right' }) {
+  useEffect(() => {
+    if (!isOpen) return
+    const timer = setTimeout(onClose, 6000) // Auto-dismiss after 6s
+    return () => clearTimeout(timer)
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  return (
+    <div className={`wip-toast wip-toast-${position}`}>
+      <div className="wip-toast-badge">🚀 WIP</div>
+      <div className="wip-toast-content">
+        <h4 className="wip-toast-title">
+          <span className="wip-toast-word wip-toast-color-1">Building</span>
+          <span className="wip-toast-word wip-toast-color-2">HR</span>
+          <span className="wip-toast-word wip-toast-color-3">Automation</span>
+        </h4>
+        <p className="wip-toast-text">Want to contribute? <a href="https://github.com/SAURABHSALVE/hr-automation" target="_blank" rel="noreferrer">Check repo 🔥</a></p>
+      </div>
+    </div>
+  )
+}
+
 export default function Projects() {
   const [active, setActive] = useState('all')
   const [selected, setSelected] = useState(null)
+  const [showWIPPopup, setShowWIPPopup] = useState(false)
+  const [wipPosition, setWipPosition] = useState('right')
+
+  useEffect(() => {
+    // Show toast endlessly: 6 seconds visible, 15 seconds gap
+    const SHOW_DURATION = 6000 // 6 seconds per toast
+    const HIDE_DURATION = 15000 // 15 seconds between shows
+
+    let timeoutId
+
+    const scheduleToast = () => {
+      // Random position: top-right or top-left
+      const position = Math.random() > 0.5 ? 'right' : 'left'
+      setWipPosition(position)
+
+      // Show toast for 6 seconds
+      setShowWIPPopup(true)
+      timeoutId = setTimeout(() => {
+        setShowWIPPopup(false)
+        // Schedule next show after 15 seconds
+        timeoutId = setTimeout(scheduleToast, HIDE_DURATION)
+      }, SHOW_DURATION)
+    }
+
+    // Start immediately
+    scheduleToast()
+    return () => clearTimeout(timeoutId)
+  }, [])
 
   return (
     <section id="projects" className="section-border">
+      <WIPToast isOpen={showWIPPopup} onClose={() => setShowWIPPopup(false)} position={wipPosition} />
+
       <div className="section-header reveal">
         <span className="section-num">03</span>
         <h2>Projects</h2>
@@ -335,6 +419,19 @@ export default function Projects() {
             index={idx}
           />
         ))}
+
+        {active === 'ml' && (
+          <div className="filter-empty-state">
+            <p className="empty-state-title">🤖 ML & Data Projects?</p>
+            <p className="empty-state-text">
+              Bro, you want to see my ML/Data work? Check my{' '}
+              <a href="https://github.com/SAURABHSALVE" target="_blank" rel="noreferrer" className="github-link">
+                GitHub
+              </a>
+              {' '}— got a whole treasure chest of notebooks, models, and data pipelines over there! 🔥
+            </p>
+          </div>
+        )}
       </div>
 
       <ProjectModal project={selected} onClose={() => setSelected(null)} />

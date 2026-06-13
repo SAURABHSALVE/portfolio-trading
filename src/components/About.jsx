@@ -35,18 +35,16 @@ export default function About() {
       <div className="about-grid">
         <div className="about-text reveal">
           <p>
-            Aspiring <strong>AI &amp; ML Engineer</strong> with hands-on experience building,
-            training, and deploying predictive models and generative AI applications. Currently
-            pursuing B.Tech in Computer Science at Deogiri Institute of Engineering (Expected 2026).
+            <span className="about-accent-large">AI/ML Engineer</span>. I don't prototype and pray — I <span className="about-accent-highlight">ship</span>.
           </p>
           <p>
-            Specializing in <strong>LangChain, RAG Pipelines, Multi-Agent Systems</strong> and
-            bridging the gap between research prototypes and scalable cloud solutions. From building
-            agentic image studios to EdTech SaaS — shipping real production systems.
+            <span className="about-accent-primary">Generative AI</span>, <span className="about-accent-secondary">RAG pipelines</span>, <span className="about-accent-tertiary">multi-agent systems</span>, <span className="about-accent-quaternary">predictive models</span> — if it's in the <span className="about-accent-bold">AI/ML stack</span>, I've <span className="about-verb">built</span> it, <span className="about-verb">broken</span> it, <span className="about-verb">fixed</span> it, and <span className="about-verb">deployed</span> it. The kind of engineer who figures it out regardless of whether the docs are good or the problem is clean.
           </p>
           <p>
-            Based in <strong>Aurangabad, Maharashtra</strong> — open to remote, hybrid, and
-            on-site roles.
+            <span className="about-accent-primary">Final year CS undergrad</span>. <span className="about-accent-highlight">Zero experience gaps</span>, just <span className="about-accent-secondary">experience</span>.
+          </p>
+          <p>
+            <span className="about-accent-tertiary">Aurangabad, Maharashtra</span> · <span className="about-accent-primary">Remote</span> / <span className="about-accent-secondary">Hybrid</span> / <span className="about-accent-tertiary">On-site</span>
           </p>
 
           <div className="about-links">

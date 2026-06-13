@@ -63,23 +63,43 @@ export default function Hero() {
       <div className="hero-inner">
         {/* ── Left: text content ── */}
         <div className="hero-content">
-          <div className="hero-tag">
           
-          </div>
-
-          <div className="hero-role-label">AI &amp; ML Engineer</div>
 
           <h1 className="hero-h1">
             <span>Saurabh</span>
             <span className="name-outline" data-text="Salve">Salve</span>
           </h1>
 
-          <p className="hero-desc">
-            Specializing in <strong>Generative AI, LLMs &amp; Agentic Workflows</strong>.
-            Building production-ready systems with{' '}
-            <strong>RAG pipelines, multi-agent architectures,</strong> and scalable cloud
-            infrastructure.<span className="cursor-blink">_</span>
+          <div className="hero-role-label">AI &amp; ML Engineer</div>
+
+          <p className="hero-desc hero-desc-main">
+            <span className="word-anim">I</span>
+            <span className="word-anim">don't</span>
+            <span className="word-anim">just</span>
+            <span className="word-anim highlight-ship">build</span>
+            <span className="word-anim">models</span>
+            <span className="word-anim">—</span>
+            <span className="word-anim highlight-orange">I</span>
+            <span className="word-anim highlight-orange">ship</span>
+            <span className="word-anim">systems.</span>
+            <span className="word-anim highlight-cyan">Generative AI</span>,
+            <span className="word-anim highlight-green">LLMs</span>,
+            <span className="word-anim highlight-purple">RAG pipelines</span>,
+            <span className="word-anim highlight-cyan">multi-agent</span>
+            <span className="word-anim highlight-cyan">architectures</span>.
+            <span className="word-anim">If</span>
+            <span className="word-anim">it's</span>
+            <span className="word-anim">in</span>
+            <span className="word-anim">the</span>
+            <span className="word-anim highlight-orange">stack</span>,
+            <span className="word-anim">I've</span>
+            <span className="word-anim">run</span>
+            <span className="word-anim">it</span>
+            <span className="word-anim">in</span>
+            <span className="word-anim highlight-green">production</span>.
           </p>
+
+          
 
           <div className="hero-actions">
             <Link to="/projects" className="btn-primary">View Projects</Link>
@@ -141,3 +161,4 @@ export default function Hero() {
     </section>
   )
 }
+
