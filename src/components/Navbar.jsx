@@ -67,17 +67,34 @@ export default function Navbar() {
   /* Track which section is in viewport on home page */
   useEffect(() => {
     if (!isHome) { setActiveSection(''); return }
+
+    const onScroll = () => {
+      if (window.scrollY < 100) {
+        setActiveSection('')
+        return
+      }
+    }
+
     const observers = HOME_SECTIONS.map(({ hash }) => {
       const el = document.getElementById(hash)
       if (!el) return null
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(hash) },
+        ([entry]) => {
+          if (entry.isIntersecting && window.scrollY >= 100) {
+            setActiveSection(hash)
+          }
+        },
         { threshold: 0.3 }
       )
       obs.observe(el)
       return obs
     }).filter(Boolean)
-    return () => observers.forEach((o) => o.disconnect())
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      observers.forEach((o) => o.disconnect())
+      window.removeEventListener('scroll', onScroll)
+    }
   }, [isHome, location.pathname])
 
   useEffect(() => { setMenuOpen(false) }, [location.pathname])
