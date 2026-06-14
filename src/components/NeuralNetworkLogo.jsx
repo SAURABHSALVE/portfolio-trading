@@ -127,7 +127,7 @@ function generateConnections(nodes) {
 /**
  * Premium Energy Particle Animation
  */
-function EnergyParticle({ fromNode, toNode, delay, duration = 4.5 }) {
+function EnergyParticle({ fromNode, toNode, delay, duration = 4.5, color }) {
   return (
     <>
       {/* Main particle */}
@@ -135,7 +135,7 @@ function EnergyParticle({ fromNode, toNode, delay, duration = 4.5 }) {
         cx={fromNode.x}
         cy={fromNode.y}
         r="1"
-        fill="#00E5FF"
+        fill={color}
         filter="url(#energyGlow)"
         initial={{ cx: fromNode.x, cy: fromNode.y, opacity: 0 }}
         animate={{
@@ -157,7 +157,7 @@ function EnergyParticle({ fromNode, toNode, delay, duration = 4.5 }) {
         cy={fromNode.y}
         r="2"
         fill="none"
-        stroke="#00E5FF"
+        stroke={color}
         strokeWidth={0.5}
         opacity={0.4}
         filter="url(#energyGlow)"
@@ -182,6 +182,7 @@ export default function NeuralNetworkLogo() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
   const [nodes, setNodes] = useState([])
   const [connections, setConnections] = useState([])
+  const [isDarkMode, setIsDarkMode] = useState(true)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -189,6 +190,17 @@ export default function NeuralNetworkLogo() {
     const handler = (e) => setPrefersReducedMotion(e.matches)
     mediaQuery.addEventListener('change', handler)
     return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
+
+  useEffect(() => {
+    const checkDarkMode = () => {
+      const theme = document.documentElement.getAttribute('data-theme')
+      setIsDarkMode(theme !== 'light')
+    }
+    checkDarkMode()
+    const observer = new MutationObserver(checkDarkMode)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
@@ -200,6 +212,7 @@ export default function NeuralNetworkLogo() {
 
   if (nodes.length === 0) return null
 
+  const logoColor = isDarkMode ? '#00E5FF' : '#0052cc'
   const coreNode = nodes[0]
   const nodeGlowOffsets = nodes.map((_, i) => (i * 0.6) % 3.5)
 
@@ -256,7 +269,7 @@ export default function NeuralNetworkLogo() {
           cy="50"
           r="38"
           fill="none"
-          stroke="#00E5FF"
+          stroke={logoColor}
           strokeWidth={0.3}
           opacity={0.05}
           animate={{
@@ -282,7 +295,7 @@ export default function NeuralNetworkLogo() {
             y1={fromNode.y}
             x2={toNode.x}
             y2={toNode.y}
-            stroke="#00E5FF"
+            stroke={logoColor}
             strokeWidth={conn.width || 0.8}
             opacity={isHovering ? 0.6 : 0.2}
             transition={{ opacity: { duration: 0.3 } }}
@@ -303,7 +316,7 @@ export default function NeuralNetworkLogo() {
               y1={fromNode.y}
               x2={toNode.x}
               y2={toNode.y}
-              stroke="#00E5FF"
+              stroke={logoColor}
               strokeWidth={(conn.width || 0.8) * 1.5}
               filter="url(#nodeGlow)"
               initial={{ opacity: 0 }}
@@ -326,6 +339,7 @@ export default function NeuralNetworkLogo() {
             toNode={nodes[conn.to]}
             delay={(i * 0.55) % 4.2}
             duration={4.5 + (i % 3) * 0.4}
+            color={logoColor}
           />
         ))}
 
@@ -343,7 +357,7 @@ export default function NeuralNetworkLogo() {
                 cy={node.y}
                 r={node.r + 2}
                 fill="none"
-                stroke="#00E5FF"
+                stroke={logoColor}
                 strokeWidth={0.4}
                 opacity={isHovering ? 0.5 : 0.15}
                 animate={{
@@ -366,7 +380,7 @@ export default function NeuralNetworkLogo() {
               cx={node.x}
               cy={node.y}
               r={node.r}
-              fill="#00E5FF"
+              fill={logoColor}
               filter={isHovering ? 'url(#hoverGlow)' : isCore ? 'url(#coreGlow)' : 'url(#nodeGlow)'}
               animate={
                 isHovering
@@ -408,7 +422,7 @@ export default function NeuralNetworkLogo() {
           cy={coreNode.y}
           r={coreNode.r}
           fill="none"
-          stroke="#00E5FF"
+          stroke={logoColor}
           strokeWidth={0.7}
           animate={{
             r: isHovering ? [coreNode.r + 3, coreNode.r + 7] : [coreNode.r + 2, coreNode.r + 5],

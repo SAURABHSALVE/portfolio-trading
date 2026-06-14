@@ -41,13 +41,6 @@ const CHAPTERS = [
   },
 ]
 
-const IDENTITY_ROLES = [
-  { word: 'Learner',           color: 'var(--accent)' },
-  { word: 'Researcher',        color: 'var(--accent2)' },
-  { word: 'Product Developer', color: 'var(--accent3)' },
-  { word: 'Engineer',          color: 'var(--accent4)' },
-]
-
 export default function Journey() {
   return (
     <section id="journey" className="section-border">
@@ -136,29 +129,6 @@ export default function Journey() {
         </div>
       </div>
 
-      {/* ── Identity closing card ── */}
-      <div className="journey-identity reveal">
-        <div className="journey-id-header">
-          <span className="journey-id-sys">// SYSTEM_IDENTITY_LOADED</span>
-          <span className="journey-id-blink" aria-hidden="true">_</span>
-        </div>
-
-        <div className="journey-id-grid">
-          {IDENTITY_ROLES.map(({ word, color }, i) => (
-            <div key={word} className="journey-id-row" style={{ animationDelay: `${i * 0.1}s` }}>
-              <span className="journey-id-prompt" style={{ color }}>{'>'}</span>
-              <span className="journey-id-always">Always a</span>
-              <strong className="journey-id-role" style={{ color, textShadow: `0 0 16px ${color}` }}>
-                {word}
-              </strong>
-            </div>
-          ))}
-        </div>
-
-        <p className="journey-id-quote">
-          "Building one system at a time — hoping for the best opportunities, or creating one."
-        </p>
-      </div>
 
     </section>
   )
