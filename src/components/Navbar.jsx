@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ThemeToggle from './ThemeToggle'
+import NeuralNetworkLogo from './NeuralNetworkLogo'
 
 /* Social / profile quick-links shown in top-right */
 const NAV_SOCIALS = [
@@ -116,13 +117,25 @@ export default function Navbar() {
     }
   }, [isHome, navigate])
 
+  const handleLogoClick = useCallback((e) => {
+    e.preventDefault()
+    setMenuOpen(false)
+    if (!isHome) {
+      navigate('/')
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 150)
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [isHome, navigate])
+
   return (
     <>
       <nav className={scrolled ? 'nav-scrolled' : ''}>
-        <Link to="/" className="nav-logo">
-          SS<span>_</span>
-          <span className="nav-logo-sub">AI_ENG</span>
-        </Link>
+        <button onClick={handleLogoClick} className="nav-logo neural-logo-link" title="Back to home" aria-label="Home">
+          <NeuralNetworkLogo />
+        </button>
 
         <ul className="nav-links nav-desktop">
           <li>
