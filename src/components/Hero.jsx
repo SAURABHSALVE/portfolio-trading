@@ -78,7 +78,6 @@ export default function Hero() {
             <span className="word-anim">just</span>
             <span className="word-anim highlight-ship">build</span>
             <span className="word-anim">models</span>
-            <span className="word-anim">—</span>
             <span className="word-anim highlight-orange">I</span>
             <span className="word-anim highlight-orange">ship</span>
             <span className="word-anim">systems.</span>

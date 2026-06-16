@@ -23,7 +23,7 @@ export default function About() {
         </div>
 
         <div className="about-cta-section">
-          <p className="about-cta-label">// Explore my full story</p>
+          <p className="about-cta-label">Explore my full story</p>
           <Link to="/" className="btn-journey-cta">
             <span>Scroll through my Journey</span>
             <span className="arrow-icon">↓</span>
@@ -32,7 +32,7 @@ export default function About() {
         </div>
 
         <div className="about-quick-links">
-          <p className="about-links-label">// Connect with me</p>
+          <p className="about-links-label">Connect with me</p>
           <div className="about-socials">
             <a
               href="https://www.linkedin.com/in/saurabhsalve99/"
