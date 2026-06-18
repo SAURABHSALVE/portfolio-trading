@@ -134,7 +134,7 @@ export default function Hero() {
               The placeholder below auto-hides once the image loads.
             */}
             <img
-              src="/profile.jpg"
+              src="/profile.png"
               alt="Saurabh Salve"
               className="hero-photo-img"
               onLoad={() => setPhotoLoaded(true)}
