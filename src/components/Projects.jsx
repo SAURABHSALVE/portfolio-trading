@@ -152,13 +152,41 @@ const projects = [
     ],
     stats: { features: '6', status: 'Hackathon Demo' },
   },
+  {
+    id: 'intelligence-system',
+    num: '07',
+    featured: true,
+    cat: 'genai fullstack featured',
+    title: 'Saurabh Labs Intelligence System',
+    subtitle: 'Automated 24/7 AI Intelligence Pipeline',
+    summary: 'Fully automated AI-powered intelligence pipeline generating 4 daily reports from 50+ data sources, analyzed with GPT-4o, delivered via email + Notion + Git.',
+    description: 'A production-grade intelligence automation system that runs flawlessly 24/7 on GitHub Actions. Every day at 4 scheduled times, it aggregates data from 50+ sources (NASA APIs, SpaceX, Reddit, arXiv, Product Hunt, RSS feeds, ISS, stock markets), analyzes trends with OpenAI GPT-4o using advanced prompt engineering, and delivers richly formatted reports via email (HTML), Notion (block-based rendering with callouts, code blocks, colored headings), and Git (markdown archive). Demonstrates systems thinking, DevOps mastery, LLM integration, and production-grade reliability. Zero manual intervention — 1,460+ reports generated annually with 100% uptime.',
+    image: '/saurabh-intelligence.png',
+    tech: 'Python · GPT-4o · GitHub Actions · Notion API · NASA/SpaceX APIs · Gmail SMTP',
+    github: 'https://github.com/SAURABHSALVE/automation-intelligence',
+    links: [
+      { label: 'GitHub Repo', href: 'https://github.com/SAURABHSALVE/automation-intelligence', color: 'green' },
+      { label: 'Live Reports', href: 'https://github.com/SAURABHSALVE/automation-intelligence/tree/main/reports', color: 'cyan' },
+    ],
+    features: [
+      '4 Daily Reports: Automated runs at 7 AM, 9 PM, 9:30 PM, 10:30 PM IST (100% uptime)',
+      '50+ Data Sources: NASA, SpaceX, Reddit, arXiv, Product Hunt, 13 RSS feeds, ISS, Solar data, stocks',
+      'GPT-4o Analysis: Advanced prompt engineering for viral content angles and deep insights',
+      'Multi-Channel Delivery: Beautiful HTML emails, richly formatted Notion pages, Git markdown archive',
+      'Notion Rich Text: Auto-generated colored headings, callout blocks, code snippets, inline markdown rendering',
+      'Production Resilience: Fast-fail on permanent errors, retry logic, context truncation, git auto-commit',
+      'Scalable Output: 2,000–8,000 word reports, 50+ structured blocks per Notion page',
+      'Complete Archive: All reports stored in git for SEO, retrospectives, and portfolio value',
+    ],
+    stats: { sources: '50+', reports: '1,460+/year' },
+  },
 
   /* ════════════════════════════════════════════════════════════════
      REGULAR PROJECTS (2)
      ════════════════════════════════════════════════════════════════ */
   {
     id: 'blog-generator',
-    num: '07',
+    num: '08',
     featured: false,
     cat: 'genai fullstack',
     title: 'Multi-Lingual Blog Generator',
@@ -179,7 +207,7 @@ const projects = [
   },
   {
     id: 'ai-image-studio',
-    num: '08',
+    num: '09',
     featured: false,
     cat: 'genai cv',
     title: 'AI Image Studio',
