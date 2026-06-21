@@ -181,13 +181,40 @@ const projects = [
     ],
     stats: { sources: '50+', reports: '1,460+/year' },
   },
+  {
+    id: 'whatsapp-rag',
+    num: '08',
+    featured: true,
+    cat: 'genai fullstack featured',
+    title: 'WhatsApp AI Assistant with RAG',
+    subtitle: 'Document Intelligence Chatbot',
+    summary: 'Intelligent WhatsApp chatbot powered by OpenAI GPT-4o and Retrieval Augmented Generation enabling real-time document Q&A through WhatsApp.',
+    description: 'A production-grade WhatsApp chatbot integrated with Meta\'s WhatsApp Business API, providing intelligent document-based Q&A capabilities. The system processes uploaded PDFs, extracts and chunks text intelligently, converts chunks to embeddings using OpenAI, and retrieves relevant context to augment AI responses. Maintains per-user conversation history in PostgreSQL for contextual replies. Features comprehensive RAG pipeline with fallback to general knowledge when documents aren\'t available. Modular architecture with separate classes for document processing, vector storage, and RAG logic. Webhook-based event handling for real-time message processing with comprehensive logging.',
+    image: '/whatsapp-automation.png',
+    tech: 'FastAPI · OpenAI GPT-4o · ChromaDB · PostgreSQL · Meta WhatsApp API',
+    github: 'https://github.com/SAURABHSALVE/whatsapp-rag-assistant',
+    links: [
+      { label: 'GitHub Repo', href: 'https://github.com/SAURABHSALVE/whatsapp-rag-assistant', color: 'green' },
+    ],
+    features: [
+      'Real-time Messaging: Integrated with Meta WhatsApp Business API for instant message handling',
+      'Document Intelligence: Upload and process PDF documents with intelligent context retrieval',
+      'RAG Pipeline: Text extraction, intelligent chunking, embedding-based retrieval, context augmentation',
+      'Conversation Memory: PostgreSQL-based chat history per user for contextual responses',
+      'Embeddings: OpenAI text-embedding-3-small for semantic document understanding',
+      'Vector Database: ChromaDB for persistent storage and fast similarity search',
+      'Fallback Intelligence: Seamless fallback to general knowledge when documents unavailable',
+      'Multi-User Support: Conversation isolation per phone number with SQLAlchemy ORM',
+    ],
+    stats: { users: 'Multi', responseTime: 'Real-time' },
+  },
 
   /* ════════════════════════════════════════════════════════════════
      REGULAR PROJECTS (2)
      ════════════════════════════════════════════════════════════════ */
   {
     id: 'blog-generator',
-    num: '08',
+    num: '09',
     featured: false,
     cat: 'genai fullstack',
     title: 'Multi-Lingual Blog Generator',
@@ -208,7 +235,7 @@ const projects = [
   },
   {
     id: 'ai-image-studio',
-    num: '09',
+    num: '10',
     featured: false,
     cat: 'genai cv',
     title: 'AI Image Studio',
