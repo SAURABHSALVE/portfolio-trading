@@ -161,7 +161,8 @@ const projects = [
     subtitle: 'Automated 24/7 AI Intelligence Pipeline',
     summary: 'Fully automated AI-powered intelligence pipeline generating 4 daily reports from 50+ data sources, analyzed with GPT-4o, delivered via email + Notion + Git.',
     description: 'A production-grade intelligence automation system that runs flawlessly 24/7 on GitHub Actions. Every day at 4 scheduled times, it aggregates data from 50+ sources (NASA APIs, SpaceX, Reddit, arXiv, Product Hunt, RSS feeds, ISS, stock markets), analyzes trends with OpenAI GPT-4o using advanced prompt engineering, and delivers richly formatted reports via email (HTML), Notion (block-based rendering with callouts, code blocks, colored headings), and Git (markdown archive). Demonstrates systems thinking, DevOps mastery, LLM integration, and production-grade reliability. Zero manual intervention — 1,460+ reports generated annually with 100% uptime.',
-    image: '/saurabh-intelligence.png',
+    image: '/saurabh-intelligence-hero.png',
+    explanatoryImage: '/saurabh-intelligence.png',
     tech: 'Python · GPT-4o · GitHub Actions · Notion API · NASA/SpaceX APIs · Gmail SMTP',
     github: 'https://github.com/SAURABHSALVE/automation-intelligence',
     links: [
@@ -319,6 +320,12 @@ function ProjectModal({ project, onClose }) {
         </div>
 
         <p className="proj-modal-description">{project.description}</p>
+
+        {project.explanatoryImage && (
+          <div className="proj-modal-image proj-modal-explanatory-image">
+            <img src={project.explanatoryImage} alt={`${project.title} Details`} />
+          </div>
+        )}
 
         {project.stats && (
           <div className="proj-modal-stats">

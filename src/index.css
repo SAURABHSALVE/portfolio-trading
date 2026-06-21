@@ -2826,6 +2826,16 @@ nav.nav-scrolled {
   filter: brightness(1.2) contrast(1.15);
 }
 
+.proj-modal-explanatory-image {
+  margin-top: 28px;
+  margin-bottom: 40px;
+  animation: imageSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+}
+
+.proj-modal-explanatory-image img {
+  animation: imageFadeIn 0.8s ease 0.3s backwards;
+}
+
 .proj-modal-header {
   margin-bottom: 20px;
   padding: 0 32px;
