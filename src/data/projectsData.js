@@ -23,6 +23,24 @@ export const PROJECTS = [
   },
   {
     num: '02',
+    featured: true,
+    cat: 'genai fullstack',
+    title: 'Saurabh Labs Intelligence System',
+    sub: 'Python · GPT-4o · GitHub Actions · Notion API · SMTP',
+    desc: 'Fully automated AI-powered intelligence pipeline generating 4 daily reports (AI, Tech, Geopolitics, Space & Science) by aggregating 50+ data sources, analyzing with GPT-4o, and delivering via email + Notion + git. Runs 24/7 on GitHub Actions with zero manual intervention—1,460+ reports/year, 50+ structured Notion blocks per report, seamless error resilience.',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/SAURABHSALVE/automation-intelligence' },
+      { label: 'Live Reports', href: 'https://github.com/SAURABHSALVE/automation-intelligence/tree/main/reports' },
+    ],
+    tags: ['GPT-4o', 'GitHub Actions', 'Notion API', 'Python', 'Automation', 'CI/CD'],
+    stats: [
+      { num: '4', label: 'Reports daily' },
+      { num: '50+', label: 'Data sources integrated' },
+      { num: '1,460+', label: 'Reports/year archived' },
+    ],
+  },
+  {
+    num: '03',
     cat: 'genai fullstack',
     title: 'Repo2Viral — EdTech SaaS',
     sub: 'GenAI · Next.js · FastAPI · OpenAI',
@@ -31,7 +49,7 @@ export const PROJECTS = [
     tags: ['RAG', 'Next.js', 'FastAPI', 'OpenAI'],
   },
   {
-    num: '03',
+    num: '04',
     cat: 'genai',
     title: 'YouTube Bot — RAG Agent',
     sub: 'RAG · LangChain · FAISS · OpenAI GPT-4',
@@ -43,7 +61,7 @@ export const PROJECTS = [
     tags: ['LangChain', 'FAISS', 'Tavily', 'Streamlit'],
   },
   {
-    num: '04',
+    num: '05',
     cat: 'cv',
     title: 'Plant Disease Detection API',
     sub: 'Computer Vision · FastAPI · Docker · ResNet50',
@@ -53,7 +71,7 @@ export const PROJECTS = [
     tags: ['ResNet50', 'FastAPI', 'Docker', 'PyTorch'],
   },
   {
-    num: '05',
+    num: '06',
     cat: 'cv ml',
     title: 'MNIST Model Analysis',
     sub: 'PyTorch · CNN / ANN / ProCNN · Streamlit',
@@ -62,7 +80,7 @@ export const PROJECTS = [
     tags: ['PyTorch', 'CNN', 'ANN', 'OpenCV', 'Streamlit'],
   },
   {
-    num: '06',
+    num: '07',
     cat: 'genai',
     title: 'Multi-Lingual Blog Generator',
     sub: 'NLP · LLMs · Flask · Prompt Engineering',
@@ -71,7 +89,7 @@ export const PROJECTS = [
     tags: ['Flask', 'LLMs', 'Prompt Eng.', 'NLP'],
   },
   {
-    num: '07',
+    num: '08',
     cat: 'ml',
     title: 'Customer Churn Prediction',
     sub: 'ANN · TensorFlow/Keras · Streamlit',
@@ -81,7 +99,7 @@ export const PROJECTS = [
     tags: ['TensorFlow', 'ANN', 'Streamlit', 'TensorBoard'],
   },
   {
-    num: '08',
+    num: '09',
     cat: 'ml',
     title: 'Stock Market Prediction App',
     sub: 'Random Forest · Plotly · yfinance · Streamlit',
@@ -90,7 +108,7 @@ export const PROJECTS = [
     tags: ['scikit-learn', 'yfinance', 'Plotly', 'Streamlit'],
   },
   {
-    num: '09',
+    num: '10',
     cat: 'fullstack genai',
     title: 'AI Resume Analyzer',
     sub: 'Django · OpenAI API · PythonAnywhere',
@@ -99,7 +117,7 @@ export const PROJECTS = [
     tags: ['Django', 'OpenAI', 'SQLite', 'PDF/DOCX'],
   },
   {
-    num: '10',
+    num: '11',
     cat: 'fullstack genai',
     title: 'Artisan Craft Platform',
     sub: 'Vertex AI · Blockchain · AR · React · Cloud Run',
