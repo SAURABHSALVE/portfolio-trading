@@ -646,7 +646,7 @@ def lambda_handler(event, context):
     category: 'GenAI',
     tags: ['RAG', 'LLM', 'Vector Database', 'Semantic Search', 'GenAI'],
     date: 'Jun 2026',
-    readTime: '9 min read',
+    readTime: '3 min read',
     featured: false,
     excerpt:
       'RAG (Retrieval Augmented Generation) is like an open book exam — you give your AI a knowledge base to refer from. Here\'s how it works, from ingestion to retrieval, with real-world patterns.',
