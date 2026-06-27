@@ -841,6 +841,64 @@ def lambda_handler(event, context):
         'man — Display command manual',
       ]},
       { type: 'tip', text: 'Start small with these 9 commands. They\'ll handle 80% of your daily Linux tasks. Practice them on a VM first before jumping into production systems.' },
+      { type: 'h2', text: 'Test Your Knowledge' },
+      { type: 'quiz', title: 'Linux Basics Quiz', description: 'Test your understanding of Linux fundamentals. Click on the correct answer for each question.', questions: [
+        {
+          text: 'What is the primary role of the Linux kernel?',
+          options: [
+            'To provide a graphical user interface',
+            'To act as the intermediary between hardware and software applications',
+            'To manage user account credentials only',
+            'To compile source code into executable binaries'
+          ],
+          correct: 1,
+          explanation: 'The kernel is the core of the OS that manages hardware resources, memory allocation, and process scheduling.'
+        },
+        {
+          text: 'Which of the following is NOT a responsibility of the kernel?',
+          options: [
+            'Memory Allocation',
+            'Process Scheduling',
+            'Rendering graphical interfaces',
+            'Hardware Management'
+          ],
+          correct: 2,
+          explanation: 'Rendering graphical interfaces is handled by applications and window managers, not the kernel itself.'
+        },
+        {
+          text: 'What does a shell do in Linux?',
+          options: [
+            'It directly controls the hardware',
+            'It compiles programs into machine code',
+            'It acts as a command-line interpreter between the user and kernel',
+            'It manages all network traffic'
+          ],
+          correct: 2,
+          explanation: 'The shell takes text commands you type and translates them into instructions the kernel can execute.'
+        },
+        {
+          text: 'Which shell is the standard default for most Linux distributions?',
+          options: [
+            'Zsh (Z Shell)',
+            'Fish (Friendly Interactive Shell)',
+            'Bash (Bourne Again Shell)',
+            'Ksh (Korn Shell)'
+          ],
+          correct: 2,
+          explanation: 'Bash is the most widely used and default shell in most Linux distributions.'
+        },
+        {
+          text: 'What is the primary job of a bootloader?',
+          options: [
+            'To update the operating system',
+            'To initialize hardware and load the kernel into memory',
+            'To manage file permissions',
+            'To optimize system performance'
+          ],
+          correct: 1,
+          explanation: 'The bootloader is the first software to run and is responsible for loading the OS kernel into RAM.'
+        }
+      ]}
     ],
   },
 ]

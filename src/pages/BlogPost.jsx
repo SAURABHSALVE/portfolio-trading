@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { getPost, BLOG_POSTS } from '../data/blogData'
 import ReadingProgress from '../components/ReadingProgress'
 import Footer from '../components/Footer'
+import ArticleQuiz from '../components/ArticleQuiz'
 
 /* ── Inline code renderer: backtick → <code> ──────────────── */
 function InlineText({ text }) {
@@ -65,6 +66,8 @@ function Block({ block }) {
           {block.caption && <figcaption className="article-image-caption">{block.caption}</figcaption>}
         </figure>
       )
+    case 'quiz':
+      return <ArticleQuiz quiz={block} />
     default:
       return null
   }
