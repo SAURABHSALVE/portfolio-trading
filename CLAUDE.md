@@ -186,43 +186,105 @@ Blocks render in sequence. Each block has a `type` and type-specific fields:
 
 ---
 
-## 4. Quiz System (ArticleQuiz Component)
+## 4. Quiz System (ArticleQuiz Component) — Enhanced v2.0
 
 ### How It Works
-1. **State:** `answers` (selected option index per question) + `showResults` (correct/incorrect)
+1. **State:** `answers` (selected option per question) + `showResults` (correct/incorrect flag)
 2. **On click:** `handleOptionClick(qIdx, optionIdx)` compares to `questions[qIdx].correct`
-3. **Visual feedback:** Green (✓) if correct, red (✗) if incorrect, shows correct answer
-4. **Score:** Displays when all questions answered, with "Try Again" button to reset
+3. **Progress tracking:** Live progress bar shows "X of Y answered" with smooth fill animation
+4. **Visual feedback:** Green (✓) if correct, red (✗) if incorrect, shows correct answer with structured feedback
+5. **Smart scoring:** Dynamic score message based on percentage (100% = Perfect Score, 80%+ = Great Job, etc.)
+6. **Score display:** Circular score badge on completion with percentage breakdown
 
-### User Flow
-1. User sees quiz section with questions
-2. Clicks an option → option highlights + button disabled for that question
-3. If correct: green highlight + explanation shown
-4. If incorrect: red highlight + correct answer shown
-5. After all questions: score displayed + reset button available
+### Enhanced User Flow
+1. Quiz header shows title + description + progress bar (only visible after first answer)
+2. User sees numbered question ("Question 1 of 5") with status indicator
+3. Clicks an option → immediate visual response + button disabled for that question
+4. **If correct:** Green highlight + checkmark (✓) + explanation + icon animation
+5. **If incorrect:** Red highlight + cross (✗) + shows correct answer + icon animation
+6. **On completion:** Full-screen score card with circular badge showing score/total + dynamic message + "Try Again" button
+7. Reset available: clears all answers, returns to beginning with fresh state
 
 ### Component Props
 ```javascript
 <ArticleQuiz quiz={{
   title: 'Quiz Title',
-  description: 'Subtitle',
+  description: 'Subtitle (optional)',
   questions: [
     {
-      text: 'Question?',
-      options: ['A', 'B', 'C', 'D'],
-      correct: 0,           // Index of correct option
-      explanation: 'Why...' // Shown on correct answer
-    }
+      text: 'Question text here?',
+      options: ['Option A', 'Option B', 'Option C', 'Option D'],
+      correct: 1,                    // Index of correct option (0-based)
+      explanation: 'Why this answer is correct and what it teaches you'
+    },
+    // ... more questions
   ]
 }} />
 ```
 
-### Styling (ArticleQuiz.css)
-- Gradient background: blue → purple
-- Color scheme: green (#10b981) for correct, red (#ef4444) for incorrect
-- Responsive: desktop (flex row) → mobile (full width)
-- Animations: smooth transitions, hover effects on options
-- Icons: ✓ (checkmark) for correct, ✗ (cross) for incorrect
+### Styling Features (ArticleQuiz.css — v2.0)
+
+#### Layout & Spacing
+- Header: 3rem bottom margin for breathing room
+- Questions: 2.5rem gap between blocks (desktop), 1.75rem (tablet), 1.75rem (mobile)
+- Question blocks: 2rem padding (desktop), 1.5rem (tablet), 1rem (mobile)
+- Feedback: 1.25rem padding with flex layout for icon + content separation
+- Score card: 3rem margin-top, 3rem padding
+
+#### Progress Bar (NEW)
+- Blue → Green gradient fill with smooth cubic-bezier animation (0.5s)
+- 8px height, rounded corners, subtle inset shadow
+- Progress text: "X of Y answered" centered below bar
+- Only shows after first answer
+
+#### Question Header (ENHANCED)
+- Flex layout with question number on left, status indicator on right
+- Status badge: 0.75rem padding, uppercase "✓ Answered" (green) or "✗ Incorrect" (red)
+- Question text: 1.15rem size, 1.5 line-height, 650 font-weight
+
+#### Options (IMPROVED)
+- Min-height 50px (48px mobile) for better touch targets
+- 1.1rem padding (desktop), 1rem (tablet), 0.9rem (mobile)
+- 32px letter badges (28px tablet, 24px mobile) with responsive font sizes
+- Smooth hover: blue border, slight blue tint, 6px slide-right, shadow on hover (disabled on mobile)
+- Answered state: slight blue tint background
+- Correct/incorrect: color-coded borders and backgrounds with opacity
+
+#### Feedback Section (REDESIGNED)
+- Flex layout: icon (1.4rem) + content (flex column)
+- Split into 3 parts: icon + label + text
+- Label: 0.9rem, uppercase, 700 weight, color-coded
+- Text: 0.95rem, 1.5 line-height, bold on answer text
+- Animations: slideDown (0.3s) on appearance
+- Color schemes:
+  - Correct: green bg (rgba(16,185,129,0.12)), green border, green label
+  - Incorrect: red bg (rgba(239,68,68,0.12)), red border, red label
+
+#### Completion Screen (CELEBRATORY)
+- Score circle: 120px diameter (100px tablet, 90px mobile)
+- Gradient blue → green circle with shadow
+- Score number: 2.2rem (1.8rem tablet, 1.5rem mobile) white text with text-shadow
+- Score message: Dynamic emoji + message (e.g., "🌟 Perfect Score! Excellent work!")
+- Score percentage: Rounded percentage in green pill badge
+- slideUp animation on appearance
+- Reset button: gradient background, 0.85rem padding, hover lift effect
+
+#### Animations
+- `slideIn` (0.3s): Option icons slide in on selection
+- `slideDown` (0.3s): Feedback appears below options
+- `slideUp` (0.5s): Completion screen slides up from bottom
+- `popIn` (0.5s cubic-bezier): Score circle bounces in on completion
+
+#### Responsive Breakpoints
+- **Desktop (>768px):** Full spacing, large fonts, smooth hover effects
+- **Tablet (≤768px):** Reduced padding, smaller fonts, less gap between elements
+- **Mobile (≤480px):** Compact padding, smaller touch targets, stacked headers, font optimized
+
+#### Color Scheme
+- Primary: #3b82f6 (blue)
+- Success: #10b981 (green)
+- Error: #ef4444 (red)
+- Uses CSS variables for theme consistency (--text-primary, --text-secondary, --bg-primary, --bg-secondary, --border-color)
 
 ---
 
@@ -356,13 +418,43 @@ Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
 4. **Commit:** "Refine {title} for better flow" or "Fix AI-sounding phrasing in {title}"
 
 ### Add Quiz to Existing Post
-1. **Open post** in `blogData.js`
-2. **Add before closing `]`:**
+1. **Open post** in `blogData.js`, scroll to the post's content array
+2. **Add quiz block before closing `]`:**
 ```javascript
-{ type: 'quiz', title: '...', description: '...', questions: [...] }
+{
+  type: 'quiz',
+  title: 'Test Your Knowledge',
+  description: 'Verify your understanding of the key concepts',
+  questions: [
+    {
+      text: 'What is the main concept?',
+      options: ['Option A', 'Option B', 'Option C', 'Option D'],
+      correct: 1,  // Index of correct option (0-based)
+      explanation: 'Clear explanation of why this is correct and what it means'
+    },
+    {
+      text: 'Second question?',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 2,
+      explanation: 'Explanation for this answer'
+    }
+    // Add 3-5 questions total per quiz
+  ]
+}
 ```
-3. **Test:** Quiz renders, interaction works (correct/incorrect feedback)
-4. **Commit:** "Add quiz to {title} blog post"
+3. **Question guidelines:**
+   - Use 2-5 questions per quiz (typically 4-5)
+   - Write clear, unambiguous question text
+   - Keep options concise (1-3 sentences max)
+   - Explanation should be educational, not just "correct"
+   - Correct answer should be a different position each time (mix indices)
+4. **Test:** `npm run dev` → navigate to post → scroll to quiz
+   - Answer questions correctly and incorrectly
+   - Verify progress bar fills as you answer
+   - Check score calculation and completion screen
+   - Test "Try Again" button resets quiz
+   - Verify mobile responsiveness
+5. **Commit:** "Add quiz to {title} blog post"
 
 ### Update Theme Colors
 1. Edit `src/index.css` — change `--primary`, `--accent`, etc.
@@ -450,11 +542,17 @@ git push                # Push to remote
 - 25 content blocks covering fundamentals
 - 5-question interactive quiz at end
 
-### Quiz System (NEW)
-- `ArticleQuiz.jsx` component for interactive MCQs
-- State management: tracks answers, shows feedback
-- Visual feedback: green for correct (✓), red for incorrect (✗)
-- Shows correct answer when user selects wrong option
+### Quiz System v2.0 (ENHANCED)
+- **Component:** `ArticleQuiz.jsx` with improved UX and visual hierarchy
+- **Progress tracking:** Live progress bar with smooth animation showing "X of Y answered"
+- **Question headers:** Displays question number/total + answered/incorrect status badge
+- **Interactive options:** 50px+ min-height buttons, smooth hover effects, slide-right animation
+- **Smart feedback:** Structured feedback with icon + label + educational text explanation
+- **Completion screen:** Circular score badge (120px) with dynamic congratulations message based on score
+- **Dynamic scoring:** 100% = "Perfect Score", 80%+ = "Great Job", 60%+ = "Good Effort", <60% = "Keep Practicing"
+- **Animations:** slideIn (options), slideDown (feedback), slideUp (completion), popIn (score circle)
+- **Mobile-first:** Fully responsive from desktop (3rem spacing) → tablet (1.5rem) → mobile (1.25rem padding)
+- **Color scheme:** Blue (#3b82f6) primary, Green (#10b981) success, Red (#ef4444) error, all with theme variables
 - Score calculation and reset functionality
 
 ---

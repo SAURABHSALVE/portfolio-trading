@@ -10,6 +10,8 @@ const directLinks = [
   { label: 'LinkedIn',     val: '/in/saurabhsalve99',             href: 'https://www.linkedin.com/in/saurabhsalve99/' },
   { label: 'GitHub',       val: 'SAURABHSALVE',                   href: 'https://github.com/SAURABHSALVE' },
   { label: 'Google Cloud', val: 'Skills Boost Profile',           href: 'https://www.skills.google/public_profiles/8e099b66-523c-407e-9c78-c58e960a2c4d' },
+  { label: 'YouTube',      val: '@saurabhlabs_tech',               href: 'https://www.youtube.com/@saurabhlabs_tech' },
+  { label: 'Instagram',    val: '@saurabhlabs',                    href: 'https://www.instagram.com/saurabhlabs/' },
   { label: 'Phone',        val: '+91 97667 89387',                href: 'tel:+919766789387' },
 ]
 

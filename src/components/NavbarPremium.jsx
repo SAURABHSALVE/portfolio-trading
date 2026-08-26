@@ -215,7 +215,7 @@ export default function NavbarPremium() {
 
           {/* Resume Button */}
           <motion.a
-            href="https://drive.google.com/file/d/11IuGRHvQkOvnITn1qVc8I0LtCssPrL4-/view"
+            href="/Saurabh_Salve_Resume_BACKEND_AI_DEVELOPER.pdf"
             target="_blank"
             rel="noreferrer"
             className="navbar-resume-btn"
